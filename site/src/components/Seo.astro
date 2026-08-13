@@ -1,0 +1,100 @@
+---
+import { SITE_NAME, SITE_URL } from '../lib/sections';
+
+interface Props {
+  title: string;
+  description: string;
+  /** полный title без суффикса сайта */
+  rawTitle?: boolean;
+  noindex?: boolean;
+  ogImage?: string;
+  /** ISO-дата публикации — включает schema.org Article */
+  publishedAt?: string;
+  updatedAt?: string;
+}
+
+const { title, description, rawTitle = false, noindex = false, ogImage, publishedAt, updatedAt } =
+  Astro.props;
+
+const fullTitle = rawTitle ? title : `${title} — ${SITE_NAME}`;
+const canonical = new URL(Astro.url.pathname, SITE_URL).href;
+const ogImageUrl = ogImage ? new URL(ogImage, SITE_URL).href : `${SITE_URL}/og-default.png`;
+
+const metrikaId = import.meta.env.PUBLIC_METRIKA_ID || '';
+const gscCode = import.meta.env.PUBLIC_GSC_VERIFICATION || '';
+const yandexCode = import.meta.env.PUBLIC_YANDEX_VERIFICATION || '';
+
+const orgSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'Прагматик',
+  url: 'https://pragmatiq.ru',
+  sameAs: ['https://t.me/pragmatik_agency', SITE_URL],
+};
+
+const articleSchema = publishedAt
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'Article',
+      headline: title,
+      description,
+      datePublished: publishedAt,
+      ...(updatedAt ? { dateModified: updatedAt } : {}),
+      author: { '@type': 'Organization', name: 'Прагматик', url: 'https://pragmatiq.ru' },
+      publisher: { '@type': 'Organization', name: 'Прагматик' },
+      mainEntityOfPage: canonical,
+    }
+  : null;
+---
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>{fullTitle}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+{noindex && <meta name="robots" content="noindex, nofollow" />}
+{gscCode && <meta name="google-site-verification" content={gscCode} />}
+{yandexCode && <meta name="yandex-verification" content={yandexCode} />}
+
+<meta property="og:type" content={publishedAt ? 'article' : 'website'} />
+<meta property="og:url" content={canonical} />
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={ogImageUrl} />
+<meta property="og:locale" content="ru_RU" />
+<meta property="og:site_name" content={SITE_NAME} />
+<meta name="twitter:card" content="summary_large_image" />
+
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
+
+<script type="application/ld+json" set:html={JSON.stringify(orgSchema)} />
+{articleSchema && <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />}
+
+{
+  metrikaId && !noindex && (
+    <script
+      is:inline
+      define:vars={{ metrikaId }}
+    >
+      /* Метрика получает URL без токенов magic-link */
+      (function (m, e, t, r, i, k, a) {
+        m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments); };
+        m[i].l = 1 * new Date();
+        (k = e.createElement(t)), (a = e.getElementsByTagName(t)[0]);
+        k.async = 1; k.src = r; a.parentNode.insertBefore(k, a);
+      })(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js', 'ym');
+      var cleanUrl = new URL(location.href);
+      ['token', 'auth_token', 'code', 'hash', 'tg_id'].forEach(function (p) {
+        if (cleanUrl.searchParams.has(p)) cleanUrl.searchParams.set(p, '__redacted__');
+      });
+      ym(Number(metrikaId), 'init', {
+        clickmap: true,
+        trackLinks: true,
+        accurateTrackBounce: true,
+        params: {},
+        url: cleanUrl.toString(),
+      });
+    </script>
+  )
+}

@@ -1,0 +1,83 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Related from '../../components/Related.astro';
+import { SECTIONS } from '../../lib/sections';
+
+export async function getStaticPaths() {
+  const paths = [];
+  for (const s of SECTIONS) {
+    const items = await getCollection(s.id, ({ data }) => !data.draft);
+    for (const entry of items) {
+      paths.push({ params: { section: s.id, slug: entry.id }, props: { entry, section: s } });
+    }
+  }
+  return paths;
+}
+
+const { entry, section } = Astro.props;
+const { Content } = await render(entry);
+const d = entry.data;
+const dateStr = d.date.toLocaleDateString('ru-RU', {
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+});
+const isTool = d.type === 'tool' && d.tool;
+---
+
+<Base
+  title={d.title}
+  description={d.description}
+  crumb={`${section.title} / ${d.title}`}
+  publishedAt={d.date.toISOString()}
+  updatedAt={d.updated?.toISOString()}
+  ogImage={d.cover}
+>
+  <div class={isTool ? 'content-wide' : 'content'}>
+    <article>
+      <header style="margin-bottom:24px;">
+        <div class="mat-card-meta" style="margin-bottom:12px;">
+          <a class="badge badge-gray" href={`/${section.id}/`}>{section.title}</a>
+          {isTool && <span class="badge badge-lime">Инструмент</span>}
+          <span>{dateStr}</span>
+        </div>
+        <h1 style="font-size:30px; font-weight:700; line-height:1.2;">{d.title}</h1>
+        <p style="font-size:16px; color:var(--muted); margin-top:10px; max-width:720px;">
+          {d.description}
+        </p>
+      </header>
+
+      {
+        isTool && (
+          <>
+            <div class="tool-frame-wrap card" style="padding:0; margin-bottom:32px;">
+              <iframe
+                src={d.tool.src}
+                title={d.title}
+                style={`width:100%; height:${d.tool.height}px; border:none; display:block;`}
+                loading="lazy"
+              />
+            </div>
+            <div class="mobile-gate" style="margin-bottom:32px;">
+              <div class="card-title">Инструмент доступен с компьютера</div>
+              <p style="margin-bottom:16px; color:var(--muted); font-size:13px;">
+                Интерактивная таблица не помещается на экран телефона.
+                Откройте эту страницу с компьютера — или отправьте себе ссылку в Telegram.
+              </p>
+              <a class="btn btn-black" data-sendme={`${section.id}/${entry.id}`} href={`https://t.me/share/url?url=${encodeURIComponent(new URL(Astro.url.pathname, 'https://sistema.pragmatiq.ru').href)}`}>
+                Отправить себе в Telegram
+              </a>
+            </div>
+          </>
+        )
+      }
+
+      <div class="prose">
+        <Content />
+      </div>
+    </article>
+
+    <Related related={d.related} tags={d.tags} selfId={`${section.id}/${entry.id}`} />
+  </div>
+</Base>

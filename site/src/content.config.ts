@@ -13,6 +13,13 @@ const material = z.object({
     .default('article'),
   cover: z.string().optional(),
   draft: z.boolean().default(false),
+  /** для type=tool: встраиваемый интерактив */
+  tool: z
+    .object({
+      src: z.string(),
+      height: z.number().default(900),
+    })
+    .optional(),
 });
 
 const section = (dir: string) =>

@@ -1,0 +1,92 @@
+---
+import Seo from '../components/Seo.astro';
+import Sidebar from '../components/Sidebar.astro';
+import { CONTACTS, SITE_NAME } from '../lib/sections';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  rawTitle?: boolean;
+  noindex?: boolean;
+  ogImage?: string;
+  publishedAt?: string;
+  updatedAt?: string;
+  /** подпись рядом с логотипом в топбаре */
+  crumb?: string;
+}
+
+const { title, description, rawTitle, noindex, ogImage, publishedAt, updatedAt, crumb } =
+  Astro.props;
+---
+
+<!doctype html>
+<html lang="ru">
+  <head>
+    <Seo
+      {title}
+      {description}
+      {rawTitle}
+      {noindex}
+      {ogImage}
+      {publishedAt}
+      {updatedAt}
+    />
+    <script is:inline>
+      // до отрисовки — чтобы сайдбар не мигал
+      if (localStorage.getItem('nav-collapsed') === '1' && window.innerWidth > 900) {
+        document.documentElement.classList.add('pre-collapsed');
+        document.addEventListener('DOMContentLoaded', function () {
+          document.body.classList.add('nav-collapsed');
+        });
+      }
+    </script>
+  </head>
+  <body>
+    <header class="topbar">
+      <button class="topbar-burger" id="nav-toggle" aria-label="Меню" title="Свернуть меню">≡</button>
+      <a class="topbar-logo" href="/">PRAGMATIQ·СИСТЕМА</a>
+      {crumb && <span class="topbar-title">/ {crumb}</span>}
+      <a class="topbar-cta" href={CONTACTS.telegram} rel="noopener">Обсудить проект</a>
+    </header>
+
+    <Sidebar />
+
+    <div class="layout">
+      <main class="main">
+        <slot />
+      </main>
+      <footer class="footer">
+        <span>© Прагматик, {new Date().getFullYear()}</span>
+        <a href={CONTACTS.site} rel="noopener">{CONTACTS.siteLabel}</a>
+        <a href={CONTACTS.telegram} rel="noopener">{CONTACTS.telegramLabel}</a>
+        <a href={`mailto:${CONTACTS.email}`}>{CONTACTS.email}</a>
+        <span style="margin-left:auto">{SITE_NAME}</span>
+      </footer>
+    </div>
+
+    <script>
+      const toggle = document.getElementById('nav-toggle');
+      const mobile = () => window.matchMedia('(max-width: 900px)').matches;
+      toggle?.addEventListener('click', () => {
+        if (mobile()) {
+          document.body.classList.toggle('nav-open');
+        } else {
+          const collapsed = document.body.classList.toggle('nav-collapsed');
+          localStorage.setItem('nav-collapsed', collapsed ? '1' : '0');
+        }
+      });
+      // клик мимо сайдбара на мобильном закрывает меню
+      document.addEventListener('click', (e) => {
+        if (!mobile() || !document.body.classList.contains('nav-open')) return;
+        const t = e.target as Node;
+        if (
+          !document.getElementById('sidebar')?.contains(t) &&
+          !toggle?.contains(t as Node)
+        ) {
+          document.body.classList.remove('nav-open');
+        }
+      });
+    </script>
+  </body>
+</html>

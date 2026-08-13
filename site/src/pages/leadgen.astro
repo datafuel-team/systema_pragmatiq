@@ -1,0 +1,195 @@
+---
+import Base from '../layouts/Base.astro';
+
+const faq = [
+  {
+    q: 'Сколько стоит лидогенерация для застройщика?',
+    a: 'Фикс за ведение канала плюс 5–15% от рекламного бюджета — процент зависит от выполнения KPI по целевым лидам, встречам и сделкам, плюс 3% сбор РКН. Минимально интересный бюджет — от 1 млн ₽ в месяц.',
+  },
+  {
+    q: 'Какие каналы вы используете?',
+    a: 'Яндекс.Директ, VK Ads, Telegram Ads и классифайды: Авито, Циан, Домклик. Канал подбираем под объект и стадию стройки, а не по шаблону.',
+  },
+  {
+    q: 'Чем целевой лид отличается от заявки?',
+    a: 'Заявка — любой контакт из рекламы. Целевой лид — контакт, который прошёл квалификацию по бюджету, срокам и интересу к объекту. Мы подписываемся в KPI именно на целевые лиды, встречи и сделки.',
+  },
+  {
+    q: 'Как быстро появятся первые целевые лиды?',
+    a: 'Аудит и стратегия занимают до 2 недель, дальше запуск и спринты по 1–2 недели с замером результата. Первые целевые лиды обычно приходят в первый месяц работы.',
+  },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faq.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+
+const steps = [
+  {
+    n: '01',
+    t: 'Аудит и стратегия',
+    d: 'Разбираем текущие кампании, аналитику и воронку продаж. Находим точки слива бюджета и собираем план запуска.',
+  },
+  {
+    n: '02',
+    t: 'Запуск кампаний',
+    d: 'Сегментируем аудитории, готовим креативы и посадочные, запускаем Директ, VK Ads, Telegram Ads и классифайды.',
+  },
+  {
+    n: '03',
+    t: 'Сквозная аналитика',
+    d: 'Каждый рубль виден от баннера до сделки. Считаем выручку из канала и конверсию во встречу, а не количество кликов.',
+  },
+  {
+    n: '04',
+    t: 'Спринты оптимизации',
+    d: 'Итерации по 1–2 недели: гипотеза, тест, данные, следующая итерация. Еженедельные синки — вы видите каждый шаг.',
+  },
+];
+
+const cases = [
+  { v: '0,68%', l: 'ДРР в VK Ads', d: 'ГК «Третий трест» — снижение ДРР на 80% за 3 месяца' },
+  { v: '15 000 000 ₽', l: 'выручка из VK', d: 'ЖК «Калинка Парк» при ДРР 2,05%' },
+  { v: '7 169 ₽', l: 'CPL в Директе', d: 'Kalinka Group — целевые лиды из контекста' },
+  { v: '×3', l: 'рост конверсии', d: 'Клубный дом «Sobranie» — сегментация офферов под портреты покупателей' },
+];
+---
+
+<Base
+  title="Лидогенерация для застройщиков: целевые лиды для недвижимости"
+  description="Приводим целевые лиды застройщикам и девелоперам: Яндекс.Директ, VK Ads, Telegram Ads, классифайды. Сквозная аналитика до сделки, комиссия привязана к KPI. Кейсы: ДРР 0,68%, CPL 7 169 ₽."
+  crumb="Лидогенерация"
+>
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="hero-eyebrow">Прагматик · Performance-маркетинг для застройщиков</div>
+      <h1 class="hero-title">Целевые лиды<br />для недвижимости</h1>
+      <p class="hero-sub">
+        Выстраиваем предсказуемый поток целевых лидов для застройщиков и девелоперов.
+        Комиссия зависит от выполнения плана — по лидам, встречам и сделкам.
+      </p>
+      <div style="margin-top:28px;">
+        <a class="btn btn-lime" href="https://t.me/kalash_nick" rel="noopener"
+          >Получить план лидогенерации</a
+        >
+      </div>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="section">
+      <div class="section-title">01 &nbsp; Как мы работаем</div>
+      <div class="mat-grid">
+        {
+          steps.map((s) => (
+            <div class="card">
+              <div class="card-title">{s.n}</div>
+              <div style="font-size:16px; font-weight:600; margin-bottom:8px;">{s.t}</div>
+              <div style="font-size:13px; color:var(--muted);">{s.d}</div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">02 &nbsp; Вы можете стать нашим клиентом, если</div>
+      <div class="card">
+        <ul style="margin-left:20px; font-size:14px; line-height:2;">
+          <li>вы застройщик или девелопер жилой недвижимости в России;</li>
+          <li>рекламный бюджет — от 1 млн ₽ в месяц;</li>
+          <li>есть отдел продаж, который обрабатывает лиды, и CRM, где видны статусы;</li>
+          <li>нужен поток целевых лидов, а не отчёт о кликах.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">03 &nbsp; Кто мы</div>
+      <div class="kpi-grid">
+        <div class="kpi-tile">
+          <div class="kpi-lbl">На рынке</div>
+          <div class="kpi-val">с 2020</div>
+          <div class="kpi-sub">только недвижимость</div>
+        </div>
+        <div class="kpi-tile">
+          <div class="kpi-lbl">География</div>
+          <div class="kpi-val">8 городов</div>
+          <div class="kpi-sub">от Калининграда до Сочи</div>
+        </div>
+        <div class="kpi-tile">
+          <div class="kpi-lbl">Целевой ДРР</div>
+          <div class="kpi-val">2–3%</div>
+          <div class="kpi-sub">доля рекламных расходов в выручке</div>
+        </div>
+        <div class="kpi-tile accent">
+          <div class="kpi-lbl">Оплата</div>
+          <div class="kpi-val">за KPI</div>
+          <div class="kpi-sub">комиссия привязана к плану</div>
+        </div>
+      </div>
+      <p style="margin-top:16px; font-size:14px; max-width:720px;">
+        Прагматик — агентство системного performance-маркетинга для застройщиков и девелоперов.
+        Делаем performance под ключ: стратегия, сквозная аналитика от баннера до сделки, креативы,
+        ведение кампаний. Основатель — Никита Калашников, 10+ лет в маркетинге недвижимости.
+      </p>
+    </div>
+
+    <div class="section">
+      <div class="section-title">04 &nbsp; Формула: инженерный маркетинг</div>
+      <div class="card">
+        <p style="font-size:15px; max-width:720px;">
+          Мы не верим в идеальные годовые планы — верим в быстрые эксперименты и данные.
+          Цикл: аудит, стратегия, запуск, итерации, масштабирование. Искусственный интеллект
+          перебирает срезы кабинетов и находит утечки бюджета, человек принимает решения.
+          Подробнее — в <a href="/principles/kak-my-rabotaem/" style="color:var(--blue);">принципах работы</a>
+          и <a href="/products/ii-audit/" style="color:var(--blue);">ИИ-аудите кабинетов</a>.
+        </p>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">05 &nbsp; Кейсы</div>
+      <div class="kpi-grid">
+        {
+          cases.map((c) => (
+            <div class="kpi-tile">
+              <div class="kpi-lbl">{c.l}</div>
+              <div class="kpi-val" style="font-size:24px;">{c.v}</div>
+              <div class="kpi-sub">{c.d}</div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">06 &nbsp; Частые вопросы</div>
+      {
+        faq.map((f) => (
+          <div class="card" style="margin-bottom:12px;">
+            <div style="font-size:15px; font-weight:600; margin-bottom:8px;">{f.q}</div>
+            <div style="font-size:13px; color:#333;">{f.a}</div>
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="section" style="text-align:center; padding:32px 0;">
+      <p style="font-size:16px; margin-bottom:20px;">
+        Расскажите про ваш объект — вернёмся с планом лидогенерации.
+      </p>
+      <a class="btn btn-lime" href="https://t.me/kalash_nick" rel="noopener"
+        >Получить план лидогенерации</a
+      >
+    </div>
+  </div>
+
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+</Base>

@@ -1,0 +1,64 @@
+---
+import { getCollection } from 'astro:content';
+import { SECTIONS } from '../lib/sections';
+import MaterialCard from './MaterialCard.astro';
+
+interface Props {
+  /** slug-и связанных материалов вида "articles/karta-utp" */
+  related: string[];
+  /** теги текущего материала — добор похожих, если related мало */
+  tags?: string[];
+  /** id текущего материала, чтобы не советовать сам себя */
+  selfId?: string;
+}
+
+const { related, tags = [], selfId = '' } = Astro.props;
+
+type Entry = { sectionId: string; id: string; data: any };
+const all: Entry[] = [];
+for (const s of SECTIONS) {
+  const items = await getCollection(s.id, ({ data }) => !data.draft);
+  for (const item of items) all.push({ sectionId: s.id, id: item.id, data: item.data });
+}
+
+const key = (e: Entry) => `${e.sectionId}/${e.id}`;
+const explicit = related
+  .map((r) => all.find((e) => key(e) === r))
+  .filter((e): e is Entry => Boolean(e));
+
+// добор по общим тегам до 4 карточек
+const byTags =
+  explicit.length < 4 && tags.length
+    ? all
+        .filter(
+          (e) =>
+            key(e) !== selfId &&
+            !explicit.some((x) => key(x) === key(e)) &&
+            e.data.tags?.some((t: string) => tags.includes(t))
+        )
+        .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+        .slice(0, 4 - explicit.length)
+    : [];
+
+const items = [...explicit, ...byTags];
+---
+
+{
+  items.length > 0 && (
+    <div class="related">
+      <div class="section-title">Связанные материалы</div>
+      <div class="mat-grid">
+        {items.map((e) => (
+          <MaterialCard
+            href={`/${e.sectionId}/${e.id}/`}
+            title={e.data.title}
+            description={e.data.description}
+            sectionId={e.sectionId}
+            date={e.data.date}
+            type={e.data.type}
+          />
+        ))}
+      </div>
+    </div>
+  )
+}

@@ -1,0 +1,29 @@
+---
+import { SECTIONS } from '../lib/sections';
+
+interface Props {
+  href: string;
+  title: string;
+  description: string;
+  sectionId: string;
+  date?: Date;
+  type?: string;
+}
+
+const { href, title, description, sectionId, date, type } = Astro.props;
+const sectionTitle = SECTIONS.find((s) => s.id === sectionId)?.title ?? sectionId;
+const dateStr = date
+  ? date.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' })
+  : '';
+---
+
+<a class="mat-card" href={href}>
+  <div class="mat-card-meta">
+    <span class:list={['badge', type === 'tool' ? 'badge-lime' : 'badge-gray']}>
+      {type === 'tool' ? 'Инструмент' : sectionTitle}
+    </span>
+    {dateStr && <span>{dateStr}</span>}
+  </div>
+  <div class="mat-card-title">{title}</div>
+  <div class="mat-card-desc">{description}</div>
+</a>

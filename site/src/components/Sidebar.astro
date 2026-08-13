@@ -1,0 +1,68 @@
+---
+import { getCollection } from 'astro:content';
+import { SECTIONS, CONTACTS } from '../lib/sections';
+
+const current = Astro.url.pathname;
+
+const sectionsWithItems = await Promise.all(
+  SECTIONS.map(async (s) => {
+    const items = (await getCollection(s.id, ({ data }) => !data.draft))
+      .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+    return { ...s, items };
+  })
+);
+
+const isActive = (path: string) => current === path || current === `${path}/`;
+const sectionOpen = (id: string) => current.startsWith(`/${id}`);
+---
+
+<aside class="sidebar" id="sidebar">
+  <nav class="sidebar-nav" aria-label="Разделы">
+    <a
+      class:list={['side-link', { active: isActive('/') }]}
+      style="padding-left:16px; font-weight:600;"
+      href="/">Главная</a
+    >
+    {
+      sectionsWithItems.map((s) => (
+        <div class:list={['side-group', { open: sectionOpen(s.id) }]} data-group={s.id}>
+          <button class="side-group-head" type="button" aria-expanded={sectionOpen(s.id)}>
+            {s.title}
+            <span class="chev">▸</span>
+          </button>
+          <div class="side-group-items">
+            <a class="side-hub-link" href={`/${s.id}/`}>
+              Обзор раздела
+            </a>
+            {s.items.map((item) => (
+              <a
+                class:list={['side-link', { active: isActive(`/${s.id}/${item.id}`) }]}
+                href={`/${s.id}/${item.id}/`}
+              >
+                {item.data.title}
+              </a>
+            ))}
+          </div>
+        </div>
+      ))
+    }
+  </nav>
+  <div class="sidebar-contacts">
+    <div class="c-label">Контакты</div>
+    <a href={CONTACTS.telegram} rel="noopener">Telegram · {CONTACTS.telegramLabel}</a>
+    <a href={`mailto:${CONTACTS.email}`}>{CONTACTS.email}</a>
+    <a href={CONTACTS.site} rel="noopener">{CONTACTS.siteLabel}</a>
+  </div>
+</aside>
+
+<script>
+  // Сворачивание групп + всего сайдбара; состояние живёт в localStorage.
+  document.querySelectorAll('.side-group-head').forEach((head) => {
+    head.addEventListener('click', () => {
+      const group = head.closest('.side-group');
+      if (!group) return;
+      group.classList.toggle('open');
+      head.setAttribute('aria-expanded', String(group.classList.contains('open')));
+    });
+  });
+</script>

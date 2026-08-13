@@ -1,17 +1,66 @@
 ---
-// Временная страница фазы 0 — заменяется в фазе 1 (MVP).
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import MaterialCard from '../components/MaterialCard.astro';
+import { SECTIONS, SITE_NAME } from '../lib/sections';
+
+type Entry = { sectionId: string; id: string; data: any };
+const all: Entry[] = [];
+for (const s of SECTIONS) {
+  const items = await getCollection(s.id, ({ data }) => !data.draft);
+  for (const item of items) all.push({ sectionId: s.id, id: item.id, data: item.data });
+}
+const latest = all.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf()).slice(0, 12);
 ---
 
-<!doctype html>
-<html lang="ru">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="robots" content="noindex" />
-    <title>Система прагматичного маркетинга недвижимости</title>
-  </head>
-  <body>
-    <h1>Система прагматичного маркетинга недвижимости</h1>
-    <p>Скоро здесь появятся материалы.</p>
-  </body>
-</html>
+<Base
+  title={SITE_NAME}
+  rawTitle
+  description="Открытая система маркетинга недвижимости от агентства «Прагматик»: методологии, инструменты, кейсы и разборы для маркетологов застройщиков."
+  crumb="Главная"
+>
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="hero-eyebrow">Прагматик · маркетинг недвижимости</div>
+      <h1 class="hero-title">Система прагматичного<br />маркетинга недвижимости</h1>
+      <p class="hero-sub">
+        Методологии, инструменты и кейсы, на которых мы строим маркетинг застройщиков.
+        Открытая часть — для всех. Рабочие материалы — по входу через Telegram.
+      </p>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="section">
+      <div class="section-title">01 &nbsp; Новые материалы</div>
+      <div class="mat-grid">
+        {
+          latest.map((e) => (
+            <MaterialCard
+              href={`/${e.sectionId}/${e.id}/`}
+              title={e.data.title}
+              description={e.data.description}
+              sectionId={e.sectionId}
+              date={e.data.date}
+              type={e.data.type}
+            />
+          ))
+        }
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">02 &nbsp; Разделы</div>
+      <div class="mat-grid">
+        {
+          SECTIONS.map((s) => (
+            <a class="mat-card" href={`/${s.id}/`}>
+              <div class="mat-card-title">{s.title}</div>
+              <div class="mat-card-desc">{s.description}</div>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</Base>
