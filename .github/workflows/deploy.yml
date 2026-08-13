@@ -34,10 +34,19 @@ jobs:
           mkdir -p ~/.ssh
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
-          ssh-keyscan -H 200.165.233.251 >> ~/.ssh/known_hosts
+
+      - name: Diag — secret key fingerprint
+        run: |
+          FP=$(ssh-keygen -lf ~/.ssh/deploy_key | awk '{print $2}')
+          echo "fingerprint: $FP"
+          test "$FP" = "SHA256:iPBdKeYfLQnGjLTAIjb6aGsqoJhF0nZt/Voc7TG83LE"
+
+      - name: Diag — server port 22 reachable
+        run: timeout 15 bash -c 'cat < /dev/null > /dev/tcp/200.165.233.251/22'
 
       - name: Deploy static
         run: |
+          ssh-keyscan -H 200.165.233.251 >> ~/.ssh/known_hosts
           rsync -az --delete \
-            -e "ssh -i ~/.ssh/deploy_key" \
+            -e "ssh -i ~/.ssh/deploy_key -o ConnectTimeout=20" \
             site/dist/ deploy@200.165.233.251:/var/www/sistema/
