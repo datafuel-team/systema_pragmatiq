@@ -3,4 +3,4 @@ Allow: /
 Disallow: /closed/
 Disallow: /api/
 
-Sitemap: https://sistema.pragmatiq.ru/sitemap-index.xml
+Sitemap: https://sistema.pragmatiq.online/sitemap-index.xml

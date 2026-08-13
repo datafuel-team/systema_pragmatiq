@@ -66,7 +66,7 @@ export const SECTIONS: SectionDef[] = [
 ];
 
 export const SITE_NAME = 'Система прагматичного маркетинга недвижимости';
-export const SITE_URL = 'https://sistema.pragmatiq.ru';
+export const SITE_URL = 'https://sistema.pragmatiq.online';
 
 export const CONTACTS = {
   telegram: 'https://t.me/pragmatik_agency',
