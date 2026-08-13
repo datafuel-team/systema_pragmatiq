@@ -40,7 +40,7 @@ const isTool = d.type === 'tool' && d.tool;
         <div class="mat-card-meta" style="margin-bottom:12px;">
           <a class="badge badge-gray" href={`/${section.id}/`}>{section.title}</a>
           {isTool && <span class="badge badge-lime">Инструмент</span>}
-          <span>{dateStr}</span>
+          <span class="mat-date">{dateStr}</span>
         </div>
         <h1 style="font-size:30px; font-weight:700; line-height:1.2;">{d.title}</h1>
         <p style="font-size:16px; color:var(--muted); margin-top:10px; max-width:720px;">

@@ -22,7 +22,7 @@ const dateStr = date
     <span class:list={['badge', type === 'tool' ? 'badge-lime' : 'badge-gray']}>
       {type === 'tool' ? 'Инструмент' : sectionTitle}
     </span>
-    {dateStr && <span>{dateStr}</span>}
+    {dateStr && <span class="mat-date">{dateStr}</span>}
   </div>
   <div class="mat-card-title">{title}</div>
   <div class="mat-card-desc">{description}</div>

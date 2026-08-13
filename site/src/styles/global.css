@@ -349,11 +349,17 @@ body.nav-collapsed .layout { padding-left: 0; }
   letter-spacing: 1px;
   padding: 3px 8px;
   text-transform: uppercase;
+  border: 1px solid transparent;
+  border-radius: 5px;
 }
 .badge-lime  { background: var(--lime);  color: var(--text); }
 .badge-blue  { background: var(--blue);  color: white; }
 .badge-black { background: var(--text);  color: white; }
-.badge-gray  { background: none; border: 1px solid var(--border); color: var(--muted); }
+.badge-gray  { background: none; color: var(--blue); }
+.badge-gray:hover { border-color: var(--blue); }
+
+/* дата в мете карточки/материала — полупрозрачная, не спорит с тегом */
+.mat-date { opacity: 0.5; }
 
 /* ---------- Кнопки ---------- */
 .btn {
