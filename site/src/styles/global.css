@@ -13,7 +13,7 @@
   --font: 'Onest', sans-serif;
   --mono: 'JetBrains Mono', monospace;
   --sidebar-w: 272px;
-  --topbar-h: 48px;
+  --topbar-h: 52px;
 }
 
 html { scroll-behavior: smooth; }
@@ -30,10 +30,11 @@ a { color: inherit; text-decoration: none; }
 table { width: 100%; border-collapse: collapse; }
 img { max-width: 100%; height: auto; }
 
-/* ---------- Топбар ---------- */
+/* ---------- Топбар (светлый) ---------- */
 .topbar {
-  background: var(--text);
-  color: var(--white);
+  background: rgba(244, 243, 241, 0.94);
+  backdrop-filter: blur(4px);
+  color: var(--text);
   position: fixed;
   top: 0; left: 0; right: 0;
   height: var(--topbar-h);
@@ -41,30 +42,40 @@ img { max-width: 100%; height: auto; }
   display: flex;
   align-items: center;
   padding: 0 16px;
-  gap: 12px;
+  gap: 14px;
+  border-bottom: 1px solid var(--border);
 }
-.topbar-burger {
-  background: none;
-  border: 1px solid #333;
-  color: #aaa;
+.nav-arrow {
+  background: var(--white);
+  border: 1px solid var(--border);
+  color: var(--text);
   font-family: var(--mono);
-  font-size: 14px;
+  font-size: 15px;
   width: 32px; height: 32px;
   cursor: pointer;
   display: flex; align-items: center; justify-content: center;
+  transition: border-color 0.15s;
 }
-.topbar-burger:hover { color: var(--lime); border-color: #555; }
+.nav-arrow:hover { border-color: var(--text); }
+.nav-arrow .arr { display: inline-block; transition: transform 0.2s; }
+body.nav-collapsed .nav-arrow .arr { transform: rotate(180deg); }
 .topbar-logo {
-  font-family: var(--mono);
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 700;
-  color: var(--lime);
-  letter-spacing: 1px;
+  letter-spacing: 0.5px;
+  color: var(--text);
   white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
+.topbar-logo .spark { color: var(--blue); font-size: 16px; }
 .topbar-title {
-  font-size: 12px;
-  color: #aaa;
+  font-family: var(--mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--muted);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -78,10 +89,11 @@ img { max-width: 100%; height: auto; }
   text-transform: uppercase;
   background: var(--lime);
   color: var(--text);
-  padding: 7px 14px;
+  padding: 9px 16px;
   white-space: nowrap;
+  transition: background 0.15s, color 0.15s;
 }
-.topbar-cta:hover { background: #c8f050; }
+.topbar-cta:hover { background: var(--blue); color: var(--white); }
 
 /* ---------- Сайдбар ---------- */
 .sidebar {
@@ -102,7 +114,21 @@ img { max-width: 100%; height: auto; }
   overflow-y: auto;
   padding: 16px 0 24px;
 }
-.side-group { margin-bottom: 4px; }
+.side-home {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 16px;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--text);
+}
+.side-home:hover { color: var(--blue); }
+.side-home .spark { color: var(--blue); }
+.side-group { margin-bottom: 2px; }
 .side-group-head {
   display: flex;
   align-items: center;
@@ -114,16 +140,18 @@ img { max-width: 100%; height: auto; }
   font-weight: 700;
   letter-spacing: 1.5px;
   text-transform: uppercase;
-  color: var(--muted);
+  color: var(--text);
   background: none;
   border: none;
   cursor: pointer;
   text-align: left;
 }
-.side-group-head:hover { color: var(--text); }
+.side-group-head:hover { color: var(--blue); }
+.side-group-head .glyph { color: var(--blue); font-size: 12px; line-height: 1; }
 .side-group-head .chev {
   margin-left: auto;
   font-size: 10px;
+  color: var(--muted);
   transition: transform 0.15s;
 }
 .side-group.open .chev { transform: rotate(90deg); }
@@ -131,12 +159,12 @@ img { max-width: 100%; height: auto; }
 .side-group.open .side-group-items { display: block; }
 .side-link {
   display: block;
-  padding: 6px 16px 6px 28px;
+  padding: 6px 16px 6px 36px;
   font-size: 13px;
   color: #444;
   border-left: 2px solid transparent;
 }
-.side-link:hover { color: var(--text); background: #faf9f7; }
+.side-link:hover { color: var(--blue); background: #faf9f7; }
 .side-link.active {
   border-left-color: var(--lime);
   background: #faf9f7;
@@ -145,18 +173,19 @@ img { max-width: 100%; height: auto; }
 }
 .side-hub-link {
   display: block;
-  padding: 6px 16px 6px 28px;
-  font-size: 12px;
+  padding: 6px 16px 6px 36px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
   color: var(--muted);
-  font-style: normal;
 }
-.side-hub-link:hover { color: var(--text); }
+.side-hub-link:hover { color: var(--blue); }
 
 .sidebar-contacts {
   border-top: 1px solid var(--border);
   padding: 14px 16px;
   font-size: 12px;
-  color: var(--muted);
 }
 .sidebar-contacts .c-label {
   font-family: var(--mono);
@@ -170,7 +199,11 @@ img { max-width: 100%; height: auto; }
 .sidebar-contacts a {
   display: block;
   padding: 3px 0;
-  color: #444;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--text);
 }
 .sidebar-contacts a:hover { color: var(--blue); }
 
@@ -197,6 +230,49 @@ body.nav-collapsed .layout { padding-left: 0; }
   margin: 0 auto;
   padding: 32px 32px 64px;
 }
+
+/* ---------- Шапка страницы (светлая, вместо hero) ---------- */
+.page-head { padding: 40px 0 8px; }
+.page-head-eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--blue);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.page-head-title {
+  font-size: 44px;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.5px;
+  color: var(--text);
+}
+.page-head-sub {
+  font-size: 16px;
+  color: var(--muted);
+  margin-top: 16px;
+  max-width: 640px;
+}
+
+/* ---------- Заголовки секций ---------- */
+.section { margin: 40px 0; }
+.section-title {
+  font-size: 11px;
+  font-family: var(--mono);
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
 
 /* ---------- Типографика материалов ---------- */
 .prose { font-size: 16px; line-height: 1.7; max-width: 720px; }
@@ -228,40 +304,6 @@ body.nav-collapsed .layout { padding-left: 0; }
 .prose a:hover { text-decoration: underline; }
 .prose hr { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
 
-/* ---------- Заголовки секций ---------- */
-.section { margin: 32px 0; }
-.section-title {
-  font-size: 11px;
-  font-family: var(--mono);
-  font-weight: 700;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: 16px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-.section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
-
-/* ---------- Хиро ---------- */
-.hero {
-  background: var(--text);
-  color: var(--white);
-  padding: 40px 0 36px;
-}
-.hero-inner { max-width: 960px; margin: 0 auto; padding: 0 32px; }
-.hero-eyebrow {
-  font-family: var(--mono);
-  font-size: 11px;
-  color: #888;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  margin-bottom: 12px;
-}
-.hero-title { font-size: 32px; font-weight: 700; line-height: 1.15; }
-.hero-sub { font-size: 15px; color: #aaa; margin-top: 12px; max-width: 640px; }
-
 /* ---------- Карточки материалов ---------- */
 .mat-grid {
   display: grid;
@@ -277,11 +319,11 @@ body.nav-collapsed .layout { padding-left: 0; }
   gap: 8px;
   transition: border-color 0.15s;
 }
-.mat-card:hover { border-color: var(--text); }
+.mat-card:hover { border-color: var(--blue); }
 .mat-card-meta {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   font-family: var(--mono);
   font-size: 10px;
   letter-spacing: 1px;
@@ -290,6 +332,12 @@ body.nav-collapsed .layout { padding-left: 0; }
 }
 .mat-card-title { font-size: 16px; font-weight: 600; line-height: 1.3; }
 .mat-card-desc { font-size: 13px; color: var(--muted); flex: 1; }
+.mat-card-arrow {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--blue);
+  margin-top: 4px;
+}
 
 /* ---------- Бейджи ---------- */
 .badge {
@@ -305,7 +353,7 @@ body.nav-collapsed .layout { padding-left: 0; }
 .badge-lime  { background: var(--lime);  color: var(--text); }
 .badge-blue  { background: var(--blue);  color: white; }
 .badge-black { background: var(--text);  color: white; }
-.badge-gray  { background: #e8e8e4;      color: #555; }
+.badge-gray  { background: none; border: 1px solid var(--border); color: var(--muted); }
 
 /* ---------- Кнопки ---------- */
 .btn {
@@ -315,15 +363,15 @@ body.nav-collapsed .layout { padding-left: 0; }
   font-weight: 700;
   letter-spacing: 1px;
   text-transform: uppercase;
-  padding: 12px 24px;
+  padding: 13px 26px;
   cursor: pointer;
   border: none;
+  transition: background 0.15s, color 0.15s;
 }
 .btn-lime { background: var(--lime); color: var(--text); }
-.btn-lime:hover { background: #c8f050; }
-.btn-black { background: var(--text); color: var(--white); }
-.btn-black:hover { background: #333; }
+.btn-lime:hover { background: var(--blue); color: var(--white); }
 .btn-outline { background: none; border: 1px solid var(--text); color: var(--text); }
+.btn-outline:hover { border-color: var(--blue); color: var(--blue); }
 
 /* ---------- Связанные материалы ---------- */
 .related { margin-top: 48px; }
@@ -357,7 +405,10 @@ tr:last-child td { border-bottom: none; }
 .footer {
   border-top: 1px solid var(--border);
   padding: 24px 32px;
-  font-size: 12px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
   color: var(--muted);
   display: flex;
   gap: 24px;
@@ -366,7 +417,7 @@ tr:last-child td { border-bottom: none; }
   margin: 0 auto;
   width: 100%;
 }
-.footer a:hover { color: var(--text); }
+.footer a:hover { color: var(--blue); }
 
 /* ---------- Мобайл ---------- */
 .mobile-gate { display: none; }
@@ -374,12 +425,11 @@ tr:last-child td { border-bottom: none; }
 @media (max-width: 900px) {
   .layout { padding-left: 0; }
   .sidebar { transform: translateX(-100%); }
-  body.nav-open .sidebar { transform: translateX(0); box-shadow: 4px 0 24px rgba(0,0,0,0.15); }
+  body.nav-open .sidebar { transform: translateX(0); box-shadow: 4px 0 24px rgba(0,0,0,0.12); }
   body.nav-collapsed .sidebar { transform: translateX(-100%); }
   body.nav-open.nav-collapsed .sidebar { transform: translateX(0); }
   .content, .content-wide { padding: 24px 16px 48px; }
-  .hero-inner { padding: 0 16px; }
-  .hero-title { font-size: 26px; }
+  .page-head-title { font-size: 30px; }
   .mat-grid { grid-template-columns: 1fr; }
   .kpi-grid, .kpi-grid-3 { grid-template-columns: 1fr 1fr; }
   .topbar-title { display: none; }

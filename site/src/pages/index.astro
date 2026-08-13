@@ -19,18 +19,16 @@ const latest = all.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
   description="Открытая система маркетинга недвижимости от агентства «Прагматик»: методологии, инструменты, кейсы и разборы для маркетологов застройщиков."
   crumb="Главная"
 >
-  <div class="hero">
-    <div class="hero-inner">
-      <div class="hero-eyebrow">Прагматик · маркетинг недвижимости</div>
-      <h1 class="hero-title">Система прагматичного<br />маркетинга недвижимости</h1>
-      <p class="hero-sub">
+  <div class="content">
+    <div class="page-head">
+      <div class="page-head-eyebrow"><span>✦</span> Прагматик · маркетинг недвижимости</div>
+      <h1 class="page-head-title">Система прагматичного<br />маркетинга недвижимости</h1>
+      <p class="page-head-sub">
         Методологии, инструменты и кейсы, на которых мы строим маркетинг застройщиков.
         Открытая часть — для всех. Рабочие материалы — по входу через Telegram.
       </p>
     </div>
-  </div>
 
-  <div class="content">
     <div class="section">
       <div class="section-title">01 &nbsp; Новые материалы</div>
       <div class="mat-grid">
@@ -57,6 +55,7 @@ const latest = all.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
             <a class="mat-card" href={`/${s.id}/`}>
               <div class="mat-card-title">{s.title}</div>
               <div class="mat-card-desc">{s.description}</div>
+              <div class="mat-card-arrow">↳ Открыть раздел</div>
             </a>
           ))
         }

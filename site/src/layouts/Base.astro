@@ -35,7 +35,6 @@ const { title, description, rawTitle, noindex, ogImage, publishedAt, updatedAt, 
     <script is:inline>
       // до отрисовки — чтобы сайдбар не мигал
       if (localStorage.getItem('nav-collapsed') === '1' && window.innerWidth > 900) {
-        document.documentElement.classList.add('pre-collapsed');
         document.addEventListener('DOMContentLoaded', function () {
           document.body.classList.add('nav-collapsed');
         });
@@ -44,10 +43,15 @@ const { title, description, rawTitle, noindex, ogImage, publishedAt, updatedAt, 
   </head>
   <body>
     <header class="topbar">
-      <button class="topbar-burger" id="nav-toggle" aria-label="Меню" title="Свернуть меню">≡</button>
-      <a class="topbar-logo" href="/">PRAGMATIQ·СИСТЕМА</a>
+      <button class="nav-arrow" id="nav-toggle" aria-label="Свернуть меню" title="Свернуть меню">
+        <span class="arr">←</span>
+      </button>
+      <a class="topbar-logo" href="/">
+        <span class="spark">✦</span>
+        ПРАГМАТИК·СИСТЕМА
+      </a>
       {crumb && <span class="topbar-title">/ {crumb}</span>}
-      <a class="topbar-cta" href={CONTACTS.telegram} rel="noopener">Обсудить проект</a>
+      <a class="topbar-cta" href={CONTACTS.telegram} rel="noopener">↳ Обсудить проект</a>
     </header>
 
     <Sidebar />

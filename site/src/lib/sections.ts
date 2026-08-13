@@ -72,6 +72,7 @@ export const CONTACTS = {
   telegram: 'https://t.me/pragmatik_agency',
   telegramLabel: '@pragmatik_agency',
   email: 'hello@pragmatiq.ru',
+  phone: '+7 915 388 04 01',
   site: 'https://pragmatiq.ru',
   siteLabel: 'pragmatiq.ru',
 };

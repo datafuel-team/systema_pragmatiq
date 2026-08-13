@@ -65,8 +65,8 @@ const isTool = d.type === 'tool' && d.tool;
                 Интерактивная таблица не помещается на экран телефона.
                 Откройте эту страницу с компьютера — или отправьте себе ссылку в Telegram.
               </p>
-              <a class="btn btn-black" data-sendme={`${section.id}/${entry.id}`} href={`https://t.me/share/url?url=${encodeURIComponent(new URL(Astro.url.pathname, 'https://sistema.pragmatiq.online').href)}`}>
-                Отправить себе в Telegram
+              <a class="btn btn-lime" data-sendme={`${section.id}/${entry.id}`} href={`https://t.me/share/url?url=${encodeURIComponent(new URL(Astro.url.pathname, 'https://sistema.pragmatiq.online').href)}`}>
+                ↳ Отправить себе в Telegram
               </a>
             </div>
           </>

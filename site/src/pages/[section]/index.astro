@@ -15,15 +15,15 @@ const items = (await getCollection(section.id, ({ data }) => !data.draft)).sort(
 ---
 
 <Base title={section.title} description={section.description} crumb={section.title}>
-  <div class="hero">
-    <div class="hero-inner">
-      <div class="hero-eyebrow">Раздел {String(section.order).padStart(2, '0')}</div>
-      <h1 class="hero-title">{section.title}</h1>
-      <p class="hero-sub">{section.description}</p>
-    </div>
-  </div>
-
   <div class="content">
+    <div class="page-head">
+      <div class="page-head-eyebrow">
+        <span>✦</span> Раздел {String(section.order).padStart(2, '0')}
+      </div>
+      <h1 class="page-head-title">{section.title}</h1>
+      <p class="page-head-sub">{section.description}</p>
+    </div>
+
     <div class="section">
       {
         items.length > 0 ? (

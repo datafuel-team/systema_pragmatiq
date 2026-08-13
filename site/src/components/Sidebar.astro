@@ -18,21 +18,21 @@ const sectionOpen = (id: string) => current.startsWith(`/${id}`);
 
 <aside class="sidebar" id="sidebar">
   <nav class="sidebar-nav" aria-label="Разделы">
-    <a
-      class:list={['side-link', { active: isActive('/') }]}
-      style="padding-left:16px; font-weight:600;"
-      href="/">Главная</a
-    >
+    <a class="side-home" href="/">
+      <span class="spark">✦</span>
+      Главная
+    </a>
     {
       sectionsWithItems.map((s) => (
         <div class:list={['side-group', { open: sectionOpen(s.id) }]} data-group={s.id}>
           <button class="side-group-head" type="button" aria-expanded={sectionOpen(s.id)}>
+            <span class="glyph">✦</span>
             {s.title}
             <span class="chev">▸</span>
           </button>
           <div class="side-group-items">
             <a class="side-hub-link" href={`/${s.id}/`}>
-              Обзор раздела
+              ↳ Обзор раздела
             </a>
             {s.items.map((item) => (
               <a
@@ -49,14 +49,15 @@ const sectionOpen = (id: string) => current.startsWith(`/${id}`);
   </nav>
   <div class="sidebar-contacts">
     <div class="c-label">Контакты</div>
-    <a href={CONTACTS.telegram} rel="noopener">Telegram · {CONTACTS.telegramLabel}</a>
+    <a href={CONTACTS.telegram} rel="noopener">↳ Написать в телеграм</a>
     <a href={`mailto:${CONTACTS.email}`}>{CONTACTS.email}</a>
+    <a href={`tel:${CONTACTS.phone.replace(/[^+\d]/g, '')}`}>{CONTACTS.phone}</a>
     <a href={CONTACTS.site} rel="noopener">{CONTACTS.siteLabel}</a>
   </div>
 </aside>
 
 <script>
-  // Сворачивание групп + всего сайдбара; состояние живёт в localStorage.
+  // Сворачивание групп; состояние по клику, активная группа открыта с сервера.
   document.querySelectorAll('.side-group-head').forEach((head) => {
     head.addEventListener('click', () => {
       const group = head.closest('.side-group');
