@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /closed/
+Disallow: /api/
+
+Sitemap: https://sistema.pragmatiq.ru/sitemap-index.xml

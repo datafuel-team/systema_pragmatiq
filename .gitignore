@@ -1,0 +1,13 @@
+node_modules/
+dist/
+.DS_Store
+__pycache__/
+*.pyc
+.env
+*.env
+!*.env.example
+*.session
+service_account*.json
+*.db
+logs/
+.astro/
