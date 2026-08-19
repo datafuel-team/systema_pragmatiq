@@ -27,7 +27,7 @@ const isTool = d.type === 'tool' && d.tool;
 ---
 
 <Base
-  title={d.title}
+  title={d.seoTitle ?? d.title}
   description={d.description}
   crumb={`${section.title} / ${d.title}`}
   publishedAt={d.date.toISOString()}

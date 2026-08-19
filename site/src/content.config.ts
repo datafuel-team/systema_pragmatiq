@@ -3,6 +3,8 @@ import { glob } from 'astro/loaders';
 
 const material = z.object({
   title: z.string(),
+  /** отдельный title для поисковиков; H1 остаётся title */
+  seoTitle: z.string().optional(),
   description: z.string(),
   date: z.coerce.date(),
   updated: z.coerce.date().optional(),

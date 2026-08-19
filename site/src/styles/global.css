@@ -452,3 +452,75 @@ tr:last-child td { border-bottom: none; }
 @media (min-width: 901px) {
   .tool-frame-wrap { display: block; }
 }
+
+/* ---------- Лонгрид: ритм и акценты ---------- */
+.prose { counter-reset: h2num; }
+.prose h2 {
+  counter-increment: h2num;
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin: 44px 0 14px;
+}
+.prose h2::before {
+  content: counter(h2num, decimal-leading-zero);
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--blue);
+  letter-spacing: 1px;
+  flex-shrink: 0;
+}
+.prose .lead { font-size: 19px; line-height: 1.6; color: var(--text); }
+.prose pre {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--lime);
+  padding: 14px 18px;
+  margin: 0 0 20px;
+  overflow-x: auto;
+  font-family: var(--mono);
+  font-size: 13px;
+  line-height: 1.6;
+}
+.prose pre code { background: none; padding: 0; }
+.callout {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--lime);
+  padding: 16px 20px;
+  margin: 24px 0;
+  font-size: 15px;
+}
+.callout .c-tag {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--blue);
+  display: block;
+  margin-bottom: 6px;
+}
+.pullstat {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  background: var(--white);
+  border: 1px solid var(--border);
+  padding: 20px 24px;
+  margin: 24px 0;
+}
+.pullstat .num {
+  font-family: var(--mono);
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+}
+.pullstat .txt { font-size: 14px; color: var(--muted); max-width: 400px; }
+.table-scroll { overflow-x: auto; margin: 0 0 20px; background: var(--white); border: 1px solid var(--border); }
+.table-scroll table { min-width: 680px; }
+@media (max-width: 900px) {
+  .pullstat { flex-direction: column; align-items: flex-start; gap: 10px; }
+}
