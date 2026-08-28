@@ -19,7 +19,13 @@ const material = z.object({
   tool: z
     .object({
       src: z.string(),
-      height: z.number().default(900),
+      /** фиксированная высота в px; оставлено для старых материалов */
+      height: z.number().optional(),
+      /** высота фрейма = calc(100vh - viewportOffset) — инструмент занимает экран */
+      viewportOffset: z.number().default(140),
+      minHeight: z.number().default(560),
+      /** широкий контейнер под инструмент (таблица УТП не влезает в 1200px) */
+      wide: z.boolean().default(true),
     })
     .optional(),
 });

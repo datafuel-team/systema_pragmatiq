@@ -24,6 +24,11 @@ const dateStr = d.date.toLocaleDateString('ru-RU', {
   year: 'numeric',
 });
 const isTool = d.type === 'tool' && d.tool;
+const toolWide = isTool && d.tool.wide !== false;
+const frameStyle = isTool
+  ? `--tool-offset:${d.tool.viewportOffset}px; --tool-min:${d.tool.minHeight}px;` +
+    (d.tool.height ? ` --tool-max:${d.tool.height}px;` : '')
+  : '';
 ---
 
 <Base
@@ -34,7 +39,7 @@ const isTool = d.type === 'tool' && d.tool;
   updatedAt={d.updated?.toISOString()}
   ogImage={d.cover}
 >
-  <div class={isTool ? 'content-wide' : 'content'}>
+  <div class={isTool ? (toolWide ? 'content-tool' : 'content-wide') : 'content'}>
     <article>
       <header style="margin-bottom:24px;">
         <div class="mat-card-meta" style="margin-bottom:12px;">
@@ -51,11 +56,21 @@ const isTool = d.type === 'tool' && d.tool;
       {
         isTool && (
           <>
+            <div class="tool-bar">
+              <span class="tool-hint">Инструмент работает прямо здесь — или на отдельной странице во весь экран</span>
+              <a class="btn btn-lime" href={d.tool.src} target="_blank" rel="noopener">
+                ↗ Открыть на весь экран
+              </a>
+              <button class="btn btn-outline" id="tool-fs" type="button">⛶ Развернуть здесь</button>
+            </div>
             <div class="tool-frame-wrap card" style="padding:0; margin-bottom:32px;">
               <iframe
+                id="tool-frame"
+                class="tool-frame"
                 src={d.tool.src}
                 title={d.title}
-                style={`width:100%; height:${d.tool.height}px; border:none; display:block;`}
+                style={frameStyle}
+                allowfullscreen
                 loading="lazy"
               />
             </div>
@@ -80,4 +95,10 @@ const isTool = d.type === 'tool' && d.tool;
 
     <Related related={d.related} tags={d.tags} selfId={`${section.id}/${entry.id}`} />
   </div>
+
+  <script>
+    document.getElementById('tool-fs')?.addEventListener('click', () => {
+      document.getElementById('tool-frame')?.requestFullscreen?.();
+    });
+  </script>
 </Base>

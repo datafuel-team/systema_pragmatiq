@@ -5,9 +5,12 @@ date: 2026-08-13
 type: tool
 tags: [утп, креатив, позиционирование, инструмент]
 related: [products/ii-audit]
+updated: 2026-08-28
 tool:
-  src: /tools/utp/index.html
-  height: 1300
+  src: /tools/utp/index.html?v=2026-08-28
+  viewportOffset: 140
+  minHeight: 560
+  wide: true
 ---
 
 ## Что это
