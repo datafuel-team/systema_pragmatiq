@@ -11,8 +11,15 @@ const material = z.object({
   tags: z.array(z.string()).default([]),
   related: z.array(z.string()).default([]),
   type: z
-    .enum(['article', 'tool', 'case', 'product', 'principle', 'blog', 'kb'])
+    .enum(['article', 'tool', 'case', 'product', 'principle', 'blog', 'kb', 'story'])
     .default('article'),
+  /** для type=story: номер главы и нейроконцепт в шапке */
+  story: z
+    .object({
+      chapter: z.number(),
+      concept: z.string(),
+    })
+    .optional(),
   cover: z.string().optional(),
   draft: z.boolean().default(false),
   /** для type=tool: встраиваемый интерактив */
@@ -44,5 +51,6 @@ export const collections = {
   articles: section('articles'),
   principles: section('principles'),
   blog: section('blog'),
+  stories: section('stories'),
   closed: section('closed'),
 };

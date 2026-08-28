@@ -24,6 +24,7 @@ const dateStr = d.date.toLocaleDateString('ru-RU', {
   year: 'numeric',
 });
 const isTool = d.type === 'tool' && d.tool;
+const isStory = d.type === 'story' && !!d.story;
 const toolWide = isTool && d.tool.wide !== false;
 const frameStyle = isTool
   ? `--tool-offset:${d.tool.viewportOffset}px; --tool-min:${d.tool.minHeight}px;` +
@@ -45,12 +46,23 @@ const frameStyle = isTool
         <div class="mat-card-meta" style="margin-bottom:12px;">
           <a class="badge badge-gray" href={`/${section.id}/`}>{section.title}</a>
           {isTool && <span class="badge badge-lime">Инструмент</span>}
+          {isStory && (
+            <span class="badge badge-blue">
+              Глава {String(d.story.chapter).padStart(2, '0')}
+            </span>
+          )}
           <span class="mat-date">{dateStr}</span>
         </div>
         <h1 style="font-size:30px; font-weight:700; line-height:1.2;">{d.title}</h1>
-        <p style="font-size:16px; color:var(--muted); margin-top:10px; max-width:720px;">
-          {d.description}
-        </p>
+        {
+          isStory ? (
+            <p class="story-concept">{d.story.concept}</p>
+          ) : (
+            <p style="font-size:16px; color:var(--muted); margin-top:10px; max-width:720px;">
+              {d.description}
+            </p>
+          )
+        }
       </header>
 
       {
@@ -88,7 +100,7 @@ const frameStyle = isTool
         )
       }
 
-      <div class="prose">
+      <div class:list={['prose', { 'prose-story': isStory }]}>
         <Content />
       </div>
     </article>

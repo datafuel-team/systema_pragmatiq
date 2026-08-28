@@ -5,7 +5,8 @@ export type SectionId =
   | 'services'
   | 'articles'
   | 'principles'
-  | 'blog';
+  | 'blog'
+  | 'stories';
 
 export interface SectionDef {
   id: SectionId;
@@ -62,6 +63,13 @@ export const SECTIONS: SectionDef[] = [
     title: 'Блог',
     description: 'Короткие заметки: наблюдения из кампаний, гипотезы, новости системы.',
     order: 7,
+  },
+  {
+    id: 'stories',
+    title: 'Рассказы',
+    description:
+      'Сатирическая проза о маркетинге недвижимости: нейробиолог Герман продаёт квартиры и объясняет, как устроена голова покупателя.',
+    order: 8,
   },
 ];
 
