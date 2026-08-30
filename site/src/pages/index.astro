@@ -8,7 +8,18 @@ type Entry = { sectionId: string; id: string; data: any };
 const all: Entry[] = [];
 for (const s of SECTIONS) {
   const items = await getCollection(s.id, ({ data }) => !data.draft);
-  for (const item of items) all.push({ sectionId: s.id, id: item.id, data: item.data });
+  let entries = items.map((item) => ({ sectionId: s.id, id: item.id, data: item.data }));
+  // серия целиком затопила бы ленту: показываем одну карточку — вход в свежую серию
+  if (s.id === 'stories') {
+    entries = entries
+      .sort(
+        (a, b) =>
+          b.data.date.valueOf() - a.data.date.valueOf() ||
+          (a.data.story?.chapter ?? 0) - (b.data.story?.chapter ?? 0)
+      )
+      .slice(0, 1);
+  }
+  all.push(...entries);
 }
 const latest = all.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf()).slice(0, 12);
 ---

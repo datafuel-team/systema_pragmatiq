@@ -9,8 +9,11 @@ export async function getStaticPaths() {
 }
 
 const { section } = Astro.props;
-const items = (await getCollection(section.id, ({ data }) => !data.draft)).sort(
-  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+// серию читают с первой главы, остальные разделы — с самого свежего
+const items = (await getCollection(section.id, ({ data }) => !data.draft)).sort((a, b) =>
+  section.id === 'stories'
+    ? (a.data.story?.chapter ?? 0) - (b.data.story?.chapter ?? 0)
+    : b.data.date.valueOf() - a.data.date.valueOf()
 );
 ---
 

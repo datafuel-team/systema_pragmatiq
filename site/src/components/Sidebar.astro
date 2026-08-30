@@ -7,7 +7,11 @@ const current = Astro.url.pathname;
 const sectionsWithItems = await Promise.all(
   SECTIONS.map(async (s) => {
     const items = (await getCollection(s.id, ({ data }) => !data.draft))
-      .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+      .sort((a, b) =>
+        s.id === 'stories'
+          ? (a.data.story?.chapter ?? 0) - (b.data.story?.chapter ?? 0)
+          : b.data.date.valueOf() - a.data.date.valueOf()
+      );
     return { ...s, items };
   })
 );
