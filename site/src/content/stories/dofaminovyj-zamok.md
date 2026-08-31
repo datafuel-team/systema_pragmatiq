@@ -6,6 +6,7 @@ date: 2026-08-28
 type: story
 story:
   chapter: 1
+  teaser: "с чего всё началось: нейробиолог уходит из института в девелоперскую корпорацию и запрещает публиковать фотографии со стройки"
   concept: "Дофамин — медиатор предвкушения, а не удовольствия. Нейрон разряжается на сигнал о награде, а не на саму награду."
 tags: [проза, нейромаркетинг, дофамин, предвкушение, застройщик]
 related: [articles/informirovannyj-polzovatel]
@@ -263,4 +264,3 @@ related: [articles/informirovannyj-polzovatel]
 <p class="n-src">Schultz W., Dayan P., Montague P.R. A Neural Substrate of Prediction and Reward. Science, 1997.</p>
 </div>
 
-<p class="story-next"><strong>Следующая глава:</strong> «Конформизм серого роя» — про то, как нанятые хипстеры в оверсайз-худи продали промзону.</p>

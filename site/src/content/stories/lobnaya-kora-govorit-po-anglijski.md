@@ -6,6 +6,7 @@ date: 2026-08-28
 type: story
 story:
   chapter: 11
+  teaser: "про золотого дельфина на болоте и четырнадцать взрослых людей, которые боялись сказать «нет» по-русски"
   concept: "Эффект иностранного языка: на неродном языке решения принимаются холоднее, а иерархический страх слабеет."
 tags: [проза, нейромаркетинг, префронтальная кора, иностранный язык, корпоративная культура]
 related: [stories/kacheli-dlya-sistemy-1-i-2]
@@ -214,4 +215,3 @@ related: [stories/kacheli-dlya-sistemy-1-i-2]
 <p class="n-src">Keysar B., Hayakawa S., An S.G. The Foreign-Language Effect. Psychological Science, 2012. Costa A. et al. Your morals depend on language. PLoS ONE, 2014.</p>
 </div>
 
-<p class="story-next"><strong>Следующая глава:</strong> «Секта Свидетелей Бетона» — про закрытый чат дольщиков, который защитит застройщика лучше любой пресс-службы.</p>

@@ -6,6 +6,7 @@ date: 2026-08-28
 type: story
 story:
   chapter: 9
+  teaser: "про восемьдесят четыре вопроса анкеты, экскурсию в подвал и человека, который не смог уйти, найдя дешевле"
   concept: "Эскалация обязательств: вложенное время нельзя вернуть, но мозг продолжает его учитывать."
 tags: [проза, нейромаркетинг, невозвратные затраты, клиентский путь, застройщик]
 related: [stories/mindalina-na-strazhe-ipoteki]
@@ -191,4 +192,3 @@ related: [stories/mindalina-na-strazhe-ipoteki]
 <p class="n-src">Arkes H., Blumer C. The psychology of sunk cost. OBHDP, 1985. Staw B. Knee-deep in the big muddy, 1976. Norton M., Mochon D., Ariely D. The IKEA effect. JCP, 2012.</p>
 </div>
 
-<p class="story-next"><strong>Следующая глава:</strong> «Качели для Системы 1 и 2» — про папку с графиками, которую Юля сделала лучше всех и после которой перестала спорить.</p>

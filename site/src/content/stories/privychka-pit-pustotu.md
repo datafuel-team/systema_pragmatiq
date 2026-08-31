@@ -6,6 +6,7 @@ date: 2026-08-28
 type: story
 story:
   chapter: 4
+  teaser: "про субботние сообщения в десять утра и инвестора, который купил квартиру в доме, которого не будет"
   concept: "Привычка: дофамин смещается на триггер, и действие перестаёт зависеть от ценности результата."
 tags: [проза, нейромаркетинг, привычки, дофамин, инвесторы]
 related: [stories/universalnyj-gamburger-shekspira]
@@ -207,4 +208,3 @@ related: [stories/universalnyj-gamburger-shekspira]
 <p class="n-src">Adams C., Dickinson A. Instrumental responding following reinforcer devaluation, 1981. Yin H., Knowlton B. The role of the basal ganglia in habit formation. Nature Reviews Neuroscience, 2006. Wood W., Neal D. A new look at habits and the habit–goal interface. Psych. Review, 2007.</p>
 </div>
 
-<p class="story-next"><strong>Следующая глава:</strong> «Фрейминг сансары» — про девяносто шесть квартир у котельной, которые никто не брал со скидкой и все разобрали по полной цене.</p>

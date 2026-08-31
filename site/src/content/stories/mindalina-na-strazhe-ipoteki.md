@@ -6,6 +6,7 @@ date: 2026-08-28
 type: story
 story:
   chapter: 8
+  teaser: "про таймер обратного отсчёта и первую ночь, когда Герман не смог заснуть"
   concept: "Миндалина: детектор угрозы срабатывает раньше коры, и страх потери сильнее радости приобретения."
 tags: [проза, нейромаркетинг, миндалина, дефицит, ипотека]
 related: [stories/effekt-svyashchennoj-kruzhki]
@@ -210,4 +211,3 @@ related: [stories/effekt-svyashchennoj-kruzhki]
 <p class="n-src">LeDoux J. The Emotional Brain, 1996. Kahneman D., Tversky A. Prospect Theory. Econometrica, 1979.</p>
 </div>
 
-<p class="story-next"><strong>Следующая глава:</strong> «Ловушка невозвратных инвестиций» — про восемьдесят четыре вопроса анкеты, экскурсию в подвал и человека, который не смог уйти, найдя дешевле.</p>

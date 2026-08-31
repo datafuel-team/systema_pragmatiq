@@ -6,6 +6,7 @@ date: 2026-08-28
 type: story
 story:
   chapter: 5
+  teaser: "про девяносто шесть квартир у котельной, которые никто не брал со скидкой и все разобрали по полной цене"
   concept: "Когнитивная переоценка: одно и то же положение дел, описанное иначе, меняет не мнение, а физиологию реакции."
 tags: [проза, нейромаркетинг, фрейминг, когнитивная переоценка, застройщик]
 related: [stories/privychka-pit-pustotu]
@@ -184,4 +185,3 @@ related: [stories/privychka-pit-pustotu]
 <p class="n-src">Tversky A., Kahneman D. The framing of decisions and the psychology of choice. Science, 1981. Ochsner K., Gross J. The cognitive control of emotion. Trends in Cognitive Sciences, 2005.</p>
 </div>
 
-<p class="story-next"><strong>Следующая глава:</strong> «Окситоциновый туман» — про пледы, тёплые ладони и офис продаж, где клиенту становится по-настоящему хорошо.</p>

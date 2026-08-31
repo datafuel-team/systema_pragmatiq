@@ -6,6 +6,7 @@ date: 2026-08-28
 type: story
 story:
   chapter: 3
+  teaser: "про то, как пятьдесят планировок парализуют человека и почему пентхаус пришлось измерять в бутылках бордо"
   concept: "Единая валюта мозга: орбитофронтальная кора сводит Баха, гамбургер и квартиру к одной шкале ценности."
 tags: [проза, нейромаркетинг, паралич выбора, орбитофронтальная кора, застройщик]
 related: [stories/konformizm-serogo-roya]
@@ -198,4 +199,3 @@ related: [stories/konformizm-serogo-roya]
 <p class="n-src">Padoa-Schioppa C., Assad J. Neurons in the orbitofrontal cortex encode economic value. Nature, 2006. Iyengar S., Lepper M. When choice is demotivating. JPSP, 2000. Scheibehenne B. et al. Can there ever be too many options? JCR, 2010.</p>
 </div>
 
-<p class="story-next"><strong>Следующая глава:</strong> «Привычка пить пустоту» — про субботние сообщения в десять утра и инвестора, который купил квартиру в доме, которого не будет.</p>

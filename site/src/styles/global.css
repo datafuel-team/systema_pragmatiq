@@ -699,3 +699,71 @@ tr:last-child td { border-bottom: none; }
   .story-note { padding: 20px 18px; }
   .story-note h3 { font-size: 18px; }
 }
+
+/* ---------- Конец главы: шеринг и переход к следующей ---------- */
+.story-end { max-width: 720px; margin: 40px 0 0; }
+.share {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 16px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.share-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-right: auto;
+}
+.share .btn { font-size: 11px; }
+.next-chapter {
+  display: block;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--lime);
+  padding: 22px 24px;
+  margin-top: 24px;
+  transition: border-color 0.15s, transform 0.15s;
+}
+a.next-chapter:hover { border-color: var(--text); border-left-color: var(--blue); }
+.nc-eyebrow {
+  display: block;
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 8px;
+}
+.nc-title { display: block; font-size: 22px; font-weight: 700; line-height: 1.2; }
+.nc-teaser {
+  display: block;
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--muted);
+  margin-top: 8px;
+}
+.nc-go {
+  display: block;
+  margin-top: 14px;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--blue);
+}
+.next-chapter--last { border-left-color: var(--border); }
+.next-chapter--last .nc-eyebrow { color: var(--muted); }
+.next-chapter--last .nc-title { font-size: 18px; }
+@media (max-width: 700px) {
+  .share-label { width: 100%; margin-bottom: 4px; }
+  .next-chapter { padding: 18px; }
+  .nc-title { font-size: 19px; }
+}

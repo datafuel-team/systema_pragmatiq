@@ -18,6 +18,8 @@ const material = z.object({
     .object({
       chapter: z.number(),
       concept: z.string(),
+      /** одна строка о самой главе — показывается в карточке «следующая глава» */
+      teaser: z.string().optional(),
     })
     .optional(),
   cover: z.string().optional(),

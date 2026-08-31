@@ -3,8 +3,9 @@
 Нужны, только если выбран **вариант A** (кадр в рамке): Higgsfield генерит картинку,
 она вставляется в брендовую рамку вместо векторной сцены.
 
-Запускать из папки `Хигсхилд/` — MCP higgsfield подключён только там
-(`claude` из этой папки, `.mcp.json` с https://mcp.higgsfield.ai/mcp).
+MCP higgsfield доступен из любой папки воркспейса (не только из `Хигсхилд/`).
+Рабочая связка: `generate_image_batch` → `jobs_wait` → скачать `result_url` в `img/`.
+Модель: `nano_banana_pro` (сервер маппит на nano_banana_2), `resolution: 2k`, `aspect_ratio: 4:5` → 1856×2304.
 
 ## Базовый стиль (добавлять к каждому промту — он держит серию в одном ключе)
 
@@ -44,3 +45,19 @@ Aspect ratio 4:5.
 2. В `NN_<глава>.html` заменить блок `.frame` на `<img src="img/NN.jpg">` (рамка, поля и подпись остаются).
 3. Отрендерить PNG:
    `"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless --force-device-scale-factor=2 --window-size=640,800 --screenshot=NN.png <url>`
+
+## Что выяснилось на первом прогоне (31.08.2026)
+
+Проверено на 9 кадрах первой главы (`img/01_v1..v9.png`, контактный лист — `01_варианты.png`).
+
+- **Базовый стиль-блок держит палитру, но не держит реквизит.** Модель дорисовывает
+  «уместные» предметы: табличку FOR SALE с текстом (v1) и брелок-домик (v4). В промт
+  обязателен явный стоп-лист: `Nothing else on the table: no signs, no placards,
+  no keychains, no toys, no props, no lettering of any kind.`
+- **«Drunk one third» читается как «допита».** Писать прямо: `still two thirds full`.
+- **`cinematic_studio_2_5` уводит в ночь и цветное боке** (v5) — для этой серии не годится,
+  палитра ломается. Оставляем `nano_banana_pro`.
+- **`phone lying face down` не воспроизводится** — тёмный прямоугольник читается одинаково
+  в обе стороны, капслок и «screen hidden» не помогают. На размере обложки разницы нет,
+  бороться не стоит.
+- Композиция «empty upper third + subject lower right» отрабатывает стабильно, кроп под рамку не нужен.

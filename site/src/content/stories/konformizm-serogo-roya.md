@@ -6,6 +6,7 @@ date: 2026-08-28
 type: story
 story:
   chapter: 2
+  teaser: "про то, как нанятые хипстеры в оверсайз-худи продали промзону"
   concept: "Социальный конформизм: мозг считает рассогласование с группой ошибкой и платит за то, чтобы её не совершить."
 tags: [проза, нейромаркетинг, конформизм, референтная группа, застройщик]
 related: [stories/dofaminovyj-zamok]
@@ -241,4 +242,3 @@ related: [stories/dofaminovyj-zamok]
 <p class="n-src">Asch S. Effects of group pressure upon the modification and distortion of judgments, 1951. Klucharev V. et al. Reinforcement Learning Signal Predicts Social Conformity. Neuron, 2009.</p>
 </div>
 
-<p class="story-next"><strong>Следующая глава:</strong> «Универсальный гамбургер Шекспира» — про то, как пятьдесят планировок парализуют человека и почему пентхаус пришлось измерять в бутылках бордо.</p>

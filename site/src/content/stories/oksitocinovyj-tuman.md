@@ -6,6 +6,7 @@ date: 2026-08-28
 type: story
 story:
   chapter: 6
+  teaser: "про пледы, тёплые ладони и офис продаж, где клиенту становится по-настоящему хорошо"
   concept: "Окситоцин и тактильный контакт: доверие — не решение, а состояние, и у него есть биохимический вход."
 tags: [проза, нейромаркетинг, окситоцин, доверие, офис продаж]
 related: [stories/frejming-sansary]
@@ -198,4 +199,3 @@ related: [stories/frejming-sansary]
 <p class="n-src">Kosfeld M. et al. Oxytocin increases trust in humans. Nature, 2005. Nave G., Camerer C., McCullough M. Does oxytocin increase trust in humans? A critical review. Perspectives on Psychological Science, 2015.</p>
 </div>
 
-<p class="story-next"><strong>Следующая глава:</strong> «Эффект священной кружки» — про магнитик на чужом холодильнике и о том, почему клиенты перестали возвращать посуду.</p>

@@ -2,20 +2,29 @@
 import { getCollection, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Related from '../../components/Related.astro';
-import { SECTIONS } from '../../lib/sections';
+import { SECTIONS, SITE_NAME } from '../../lib/sections';
 
 export async function getStaticPaths() {
   const paths = [];
   for (const s of SECTIONS) {
     const items = await getCollection(s.id, ({ data }) => !data.draft);
+    // серия читается подряд, поэтому каждой главе нужен указатель на следующую
+    const byChapter = [...items].sort(
+      (a, b) => (a.data.story?.chapter ?? 0) - (b.data.story?.chapter ?? 0)
+    );
     for (const entry of items) {
-      paths.push({ params: { section: s.id, slug: entry.id }, props: { entry, section: s } });
+      const i = byChapter.indexOf(entry);
+      const next = s.id === 'stories' && i > -1 ? byChapter[i + 1] : undefined;
+      paths.push({
+        params: { section: s.id, slug: entry.id },
+        props: { entry, section: s, next: next ? { id: next.id, data: next.data } : null },
+      });
     }
   }
   return paths;
 }
 
-const { entry, section } = Astro.props;
+const { entry, section, next } = Astro.props;
 const { Content } = await render(entry);
 const d = entry.data;
 const dateStr = d.date.toLocaleDateString('ru-RU', {
@@ -25,6 +34,8 @@ const dateStr = d.date.toLocaleDateString('ru-RU', {
 });
 const isTool = d.type === 'tool' && d.tool;
 const isStory = d.type === 'story' && !!d.story;
+const shareUrl = new URL(Astro.url.pathname, 'https://sistema.pragmatiq.online').href;
+const shareText = `${d.title} — ${SITE_NAME}`;
 const toolWide = isTool && d.tool.wide !== false;
 const frameStyle = isTool
   ? `--tool-offset:${d.tool.viewportOffset}px; --tool-min:${d.tool.minHeight}px;` +
@@ -103,6 +114,51 @@ const frameStyle = isTool
       <div class:list={['prose', { 'prose-story': isStory }]}>
         <Content />
       </div>
+
+      {
+        isStory && (
+          <div class="story-end">
+            <div class="share">
+              <span class="share-label">Поделиться главой</span>
+              <a
+                class="btn btn-lime share-tg"
+                href={`https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareText)}`}
+                target="_blank"
+                rel="noopener"
+              >
+                ✈ В Telegram
+              </a>
+              <button class="btn btn-outline share-sys" type="button" hidden
+                data-url={shareUrl} data-title={d.title} data-text={shareText}>
+                ↗ Поделиться
+              </button>
+              <button class="btn btn-outline share-copy" type="button" data-url={shareUrl}>
+                ⧉ Копировать ссылку
+              </button>
+            </div>
+
+            {next ? (
+              <a class="next-chapter" href={`/stories/${next.id}/`}>
+                <span class="nc-eyebrow">
+                  Следующая глава · {String(next.data.story.chapter).padStart(2, '0')}
+                </span>
+                <span class="nc-title">{next.data.title}</span>
+                {next.data.story.teaser && <span class="nc-teaser">{next.data.story.teaser}</span>}
+                <span class="nc-go">Читать дальше ↳</span>
+              </a>
+            ) : (
+              <div class="next-chapter next-chapter--last">
+                <span class="nc-eyebrow">Продолжение следует</span>
+                <span class="nc-title">Это последняя опубликованная глава</span>
+                <span class="nc-teaser">
+                  В сборнике двадцать глав, следующие выходят по мере готовности.
+                </span>
+                <a class="nc-go" href="/stories/">Все главы серии ↳</a>
+              </div>
+            )}
+          </div>
+        )
+      }
     </article>
 
     <Related related={d.related} tags={d.tags} selfId={`${section.id}/${entry.id}`} />
@@ -111,6 +167,35 @@ const frameStyle = isTool
   <script>
     document.getElementById('tool-fs')?.addEventListener('click', () => {
       document.getElementById('tool-frame')?.requestFullscreen?.();
+    });
+
+    // Системное «Поделиться» (iOS, Android, macOS) — там оно открывает приложение Telegram
+    const sys = document.querySelector('.share-sys') as HTMLButtonElement | null;
+    if (sys && typeof navigator.share === 'function') {
+      sys.hidden = false;
+      sys.addEventListener('click', () => {
+        navigator
+          .share({
+            title: sys.dataset.title,
+            text: sys.dataset.text,
+            url: sys.dataset.url,
+          })
+          .catch(() => {});
+      });
+    }
+
+    const copy = document.querySelector('.share-copy') as HTMLButtonElement | null;
+    copy?.addEventListener('click', async () => {
+      const url = copy.dataset.url;
+      if (!url) return;
+      try {
+        await navigator.clipboard.writeText(url);
+      } catch {
+        return;
+      }
+      const was = copy.textContent;
+      copy.textContent = '✓ Скопировано';
+      setTimeout(() => (copy.textContent = was), 1800);
     });
   </script>
 </Base>

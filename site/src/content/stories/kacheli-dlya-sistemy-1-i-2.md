@@ -6,6 +6,7 @@ date: 2026-08-28
 type: story
 story:
   chapter: 10
+  teaser: "про папку с графиками, которую Юля сделала лучше всех и после которой перестала спорить"
   concept: "Две системы мышления: быстрая решает, медленная объясняет — и обе искренне считают, что работала вторая."
 tags: [проза, нейромаркетинг, система 1 и 2, рационализация, застройщик]
 related: [stories/lovushka-nevozvratnyh-investicij]
@@ -214,4 +215,3 @@ related: [stories/lovushka-nevozvratnyh-investicij]
 <p class="n-src">Nisbett R., Wilson T. Telling more than we can know. Psych. Review, 1977. Kahneman D. Thinking, Fast and Slow, 2011. Haidt J. The Righteous Mind, 2012.</p>
 </div>
 
-<p class="story-next"><strong>Следующая глава:</strong> «Лобная кора говорит по-английски» — про золотого дельфина на болоте и четырнадцать взрослых людей, которые боялись сказать «нет» по-русски.</p>

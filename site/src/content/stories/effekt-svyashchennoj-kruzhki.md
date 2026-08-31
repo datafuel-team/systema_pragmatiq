@@ -6,6 +6,7 @@ date: 2026-08-28
 type: story
 story:
   chapter: 7
+  teaser: "про магнитик на чужом холодильнике и о том, почему клиенты перестали возвращать посуду"
   concept: "Эффект владения: как только вещь считается своей, расставание с ней оценивается вдвое дороже, чем приобретение."
 tags: [проза, нейромаркетинг, эффект владения, шоу-рум, застройщик]
 related: [stories/oksitocinovyj-tuman]
@@ -199,4 +200,3 @@ related: [stories/oksitocinovyj-tuman]
 <p class="n-src">Kahneman D., Knetsch J., Thaler R. Experimental Tests of the Endowment Effect and the Coase Theorem. JPE, 1990. Peck J., Shu S. The Effect of Mere Touch on Perceived Ownership. JCR, 2009. Plott C., Zeiler K. The Willingness to Pay–Willingness to Accept Gap. AER, 2005.</p>
 </div>
 
-<p class="story-next"><strong>Следующая глава:</strong> «Миндалина на страже ипотеки» — про таймер обратного отсчёта и первую ночь, когда Герман не смог заснуть.</p>
