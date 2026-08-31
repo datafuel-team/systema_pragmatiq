@@ -767,3 +767,12 @@ a.next-chapter:hover { border-color: var(--text); border-left-color: var(--blue)
   .next-chapter { padding: 18px; }
   .nc-title { font-size: 19px; }
 }
+
+/* ---------- Кадр в начале рассказа ---------- */
+.story-hero {
+  max-width: 720px;
+  margin: 0 0 30px;
+  background: #0d0d0d;
+  line-height: 0;
+}
+.story-hero img { width: 100%; height: auto; display: block; }

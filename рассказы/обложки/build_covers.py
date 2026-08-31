@@ -46,7 +46,7 @@ h1 .l{{background:var(--lime);color:var(--ink)}}
 .hook{{margin-top:14px;font-size:17px;line-height:1.42;font-weight:500;
 color:rgba(255,255,255,.92);max-width:520px}}
 .shot{{position:relative;margin-top:20px;flex:1;min-height:300px;overflow:hidden;background:#141414}}
-.shot img{{width:100%;height:100%;object-fit:cover;display:block}}
+.shot img{{width:100%;height:100%;object-fit:cover;object-position:50% 76%;display:block}}
 .stub{{width:100%;height:100%;display:flex;align-items:center;justify-content:center;
 border:1px dashed rgba(255,255,255,.22);font-family:var(--mono);font-size:11px;
 letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.35);text-align:center;padding:0 30px}}
@@ -81,6 +81,29 @@ text-transform:uppercase;color:rgba(255,255,255,.5);line-height:1.6}}
 </body></html>
 '''
 
+TPL_INLINE = '''<!doctype html><html lang="ru"><head><meta charset="utf-8">
+<title>Глава {ch:02d} — врезка</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
+<style>
+*{{margin:0;padding:0;box-sizing:border-box}}
+body{{width:1200px;height:720px;background:#0d0d0d;position:relative;overflow:hidden}}
+img{{width:100%;height:100%;object-fit:cover;object-position:50% 76%;display:block}}
+.stub{{width:100%;height:100%;display:flex;align-items:center;justify-content:center;
+font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:2px;
+text-transform:uppercase;color:rgba(255,255,255,.3)}}
+/* марка: только знак и номер главы — в статье текст не нужен */
+.mark{{position:absolute;left:0;bottom:0;display:flex;align-items:stretch;height:38px}}
+.sq{{width:38px;background:#d5fc6a;color:#0d0d0d;display:flex;align-items:center;
+justify-content:center;font-size:18px;line-height:1}}
+.lbl{{background:rgba(13,13,13,.82);color:#fff;font-family:'JetBrains Mono',monospace;
+font-size:11px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;
+display:flex;align-items:center;padding:0 16px}}
+</style></head><body>
+{shot}
+<div class="mark"><div class="sq">✦</div><div class="lbl">Глава {ch:02d}</div></div>
+</body></html>
+'''
+
 def build(items, png=False):
     os.makedirs(OUT, exist_ok=True)
     for it in items:
@@ -96,8 +119,10 @@ def build(items, png=False):
         size = 52 if len(it['lines']) < 3 else 44
         html = TPL.format(ch=ch, plain=plain, head=head, hook=it['hook'],
                           concept=it.get('concept', ''), size=size, shot=shot)
-        path = os.path.join(OUT, '%02d.html' % ch)
-        io.open(path, 'w', encoding='utf-8').write(html)
+        io.open(os.path.join(OUT, '%02d.html' % ch), 'w', encoding='utf-8').write(html)
+        shot_in = shot if os.path.exists(img) else '<div class="stub">нет img/%02d.jpg</div>' % ch
+        io.open(os.path.join(OUT, '%02d_inline.html' % ch), 'w', encoding='utf-8').write(
+            TPL_INLINE.format(ch=ch, shot=shot_in))
         print('html %02d — %s' % (ch, plain))
     if png:
         render(items)
@@ -112,7 +137,12 @@ def render(items):
                         '--force-device-scale-factor=2', '--window-size=640,800',
                         '--screenshot=' + os.path.join(OUT, '%02d.png' % ch), src],
                        stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-        print('png  %02d' % ch)
+        subprocess.run([CHROME, '--headless', '--disable-gpu', '--hide-scrollbars',
+                        '--force-device-scale-factor=2', '--window-size=1200,720',
+                        '--screenshot=' + os.path.join(OUT, '%02d_inline.png' % ch),
+                        'file://' + os.path.join(OUT, '%02d_inline.html' % ch)],
+                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        print('png  %02d — превью 640x800 + врезка 1200x720' % ch)
 
 if __name__ == '__main__':
     data = json.load(io.open(os.path.join(ROOT, 'covers.json'), encoding='utf-8'))

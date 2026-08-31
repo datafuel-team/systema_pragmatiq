@@ -77,6 +77,14 @@ const frameStyle = isTool
       </header>
 
       {
+        isStory && d.cover && (
+          <figure class="story-hero">
+            <img src={d.cover} alt="" width="1200" height="720" />
+          </figure>
+        )
+      }
+
+      {
         isTool && (
           <>
             <div class="tool-bar">
