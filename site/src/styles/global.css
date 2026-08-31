@@ -632,3 +632,70 @@ tr:last-child td { border-bottom: none; }
   .prose-story { font-size: 16px; }
   .prose-story > p:first-of-type::first-letter { font-size: 44px; }
 }
+
+/* ---------- Врезка «Механизм»: сухой разбор в конце рассказа ---------- */
+.story-note {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--blue);
+  padding: 26px 28px 24px;
+  margin: 44px 0 0;
+  font-size: 15px;
+  line-height: 1.65;
+}
+.story-note .n-tag {
+  display: block;
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 10px;
+}
+.story-note h3 {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.25;
+  margin: 0 0 14px;
+}
+.story-note p { margin: 0 0 12px; }
+.story-note p:last-child { margin-bottom: 0; }
+.story-note .n-fig {
+  margin: 18px 0;
+  padding: 16px 0 6px;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  overflow-x: auto;
+}
+.story-note .n-fig svg { display: block; margin: 0 auto; }
+.story-note .n-cap {
+  font-family: var(--mono);
+  font-size: 10px;
+  line-height: 1.5;
+  color: var(--muted);
+  margin-top: 8px;
+  text-align: center;
+}
+.story-note .n-src {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+  font-family: var(--mono);
+  font-size: 10.5px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+.story-note .n-limit {
+  background: var(--bg);
+  border-left: 2px solid var(--lime);
+  padding: 10px 14px;
+  margin: 14px 0 0;
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: #3a3a3a;
+}
+@media (max-width: 700px) {
+  .story-note { padding: 20px 18px; }
+  .story-note h3 { font-size: 18px; }
+}

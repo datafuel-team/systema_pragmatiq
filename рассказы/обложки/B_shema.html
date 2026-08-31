@@ -1,0 +1,93 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8">
+<title>Дофаминовый замок — вариант B</title>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#f4f3f1;--white:#fff;--lime:#d5fc6a;--blue:#2558fc;--text:#111;--muted:#666;--border:#d8d7d1;
+--font:'Onest',system-ui,sans-serif;--mono:'JetBrains Mono',ui-monospace,monospace}
+body{width:640px;height:800px;background:var(--bg);font-family:var(--font);color:var(--text);
+display:flex;flex-direction:column;padding:28px 30px 26px}
+.top{display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mono);
+font-size:11px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--blue)}
+.top .r{color:var(--muted)}
+h1{margin-top:26px;font-size:50px;font-weight:700;line-height:1.03;letter-spacing:-1.3px}
+h1 span{background:var(--lime);padding:0 8px;margin-left:-8px}
+.lead{margin-top:14px;font-size:15px;line-height:1.5;color:#3a3a3a;max-width:470px}
+.chart{margin-top:22px;background:var(--white);border:1px solid var(--border);padding:20px 22px 18px;
+display:flex;flex-direction:column}
+.chart-h{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:1.6px;
+text-transform:uppercase;color:var(--blue);margin-bottom:4px}
+.chart-s{font-family:var(--mono);font-size:10px;color:var(--muted);margin-bottom:14px}
+svg{display:block}
+.legend{margin-top:12px;display:flex;gap:20px;padding-top:14px;border-top:1px solid var(--border);
+font-family:var(--mono);font-size:9.5px;letter-spacing:.4px;color:#3a3a3a}
+.legend i{display:inline-block;width:9px;height:9px;margin-right:6px;vertical-align:-1px}
+.steps{margin-top:14px;display:flex;align-items:stretch;gap:8px}
+.step{flex:1;background:var(--bg);border-left:2px solid var(--lime);padding:10px 12px;
+font-family:var(--mono);font-size:9.5px;line-height:1.5;color:var(--muted)}
+.step b{display:block;font-family:var(--font);font-size:14px;font-weight:600;color:var(--text);margin-bottom:3px}
+.step.off{border-left-color:#c9c7c0;opacity:.6}
+.arr{align-self:center;font-family:var(--mono);font-size:14px;color:var(--blue)}
+.foot{margin-top:auto;padding-top:20px;display:flex;align-items:center;gap:12px}
+.mark{width:30px;height:30px;background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center;font-size:16px}
+.foot .t{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted)}
+.foot .t b{color:var(--text);display:block;letter-spacing:1.2px}
+</style></head><body>
+<div class="top"><span>[ Орбит-фронтальный переход ]</span><span class="r">/ Глава 01</span></div>
+
+<h1>Дофаминовый<br><span>замок</span></h1>
+<div class="lead">Праздник происходит в ожидании. Когда дождался — это уже не счастье, это имущество.</div>
+
+<div class="chart">
+  <div class="chart-h">Разряд дофаминового нейрона</div>
+  <div class="chart-s">по мотивам опытов Шульца: обученное животное, сигнал → награда</div>
+  <svg width="536" height="250" viewBox="0 0 536 250">
+    <defs><pattern id="g" width="53.6" height="40" patternUnits="userSpaceOnUse">
+      <path d="M53.6 0 H0 V40" fill="none" stroke="#eceae5" stroke-width="1"/></pattern></defs>
+    <rect x="0" y="10" width="536" height="200" fill="url(#g)"/>
+    <line x1="0" y1="150" x2="536" y2="150" stroke="#d8d7d1" stroke-width="1"/>
+    <text x="4" y="146" font-family="'JetBrains Mono',monospace" font-size="9" fill="#999">базовый уровень</text>
+
+    <!-- ДО обучения: разряд на награду -->
+    <path d="M0 150 H370 L376 150 L380 62 L386 150 H536" fill="none" stroke="#b9b7b0" stroke-width="2.5" stroke-dasharray="5 4"/>
+
+    <!-- ПОСЛЕ обучения: разряд на сигнал, тишина на награде -->
+    <path d="M0 150 H92 L98 150 L103 34 L110 150 H370 L376 150 L380 168 L386 150 H536"
+          fill="none" stroke="#2558fc" stroke-width="3"/>
+
+    <!-- сигнал -->
+    <line x1="103" y1="18" x2="103" y2="210" stroke="#111" stroke-width="1"/>
+    <rect x="60" y="212" width="88" height="20" fill="#d5fc6a"/>
+    <text x="70" y="226" font-family="'JetBrains Mono',monospace" font-size="10" font-weight="700" fill="#111">СИГНАЛ</text>
+    <circle cx="103" cy="18" r="7" fill="#d5fc6a" stroke="#111" stroke-width="1.5"/>
+    <line x1="103" y1="25" x2="103" y2="30" stroke="#111" stroke-width="1.5"/>
+
+    <!-- награда -->
+    <line x1="380" y1="18" x2="380" y2="210" stroke="#111" stroke-width="1" stroke-dasharray="3 3"/>
+    <rect x="338" y="212" width="90" height="20" fill="#111"/>
+    <text x="348" y="226" font-family="'JetBrains Mono',monospace" font-size="10" font-weight="700" fill="#fff">НАГРАДА</text>
+    <ellipse cx="380" cy="18" rx="6" ry="8" fill="#7a4a8c"/>
+
+    <text x="112" y="46" font-family="'JetBrains Mono',monospace" font-size="10" font-weight="700" fill="#2558fc">пик на обещании</text>
+    <text x="392" y="196" font-family="'JetBrains Mono',monospace" font-size="10" font-weight="700" fill="#2558fc">тишина на выдаче</text>
+    <text x="392" y="76" font-family="'JetBrains Mono',monospace" font-size="9.5" fill="#8a8880">до обучения:</text><text x="392" y="90" font-family="'JetBrains Mono',monospace" font-size="9.5" fill="#8a8880">разряд на награду</text>
+  </svg>
+  <div class="legend">
+    <span><i style="background:#2558fc"></i>после обучения</span>
+    <span><i style="background:#b9b7b0"></i>до обучения</span>
+    <span><i style="background:#d5fc6a"></i>момент, за который платят</span>
+  </div>
+  <div class="steps">
+    <div class="step"><b>Сигнал</b>рендер террасы</div>
+    <div class="arr">→</div>
+    <div class="step"><b>Пауза</b>пять лет стройки</div>
+    <div class="arr">→</div>
+    <div class="step off"><b>Награда</b>ключи и ипотека</div>
+  </div>
+</div>
+
+<div class="foot">
+  <div class="mark">✦</div>
+  <div class="t"><b>Прагматик · Система</b>sistema.pragmatiq.online / stories</div>
+</div>
+</body></html>
