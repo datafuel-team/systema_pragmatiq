@@ -11,3 +11,6 @@ service_account*.json
 *.db
 logs/
 .astro/
+
+# сборка обложек: PNG пересобираются из covers.json
+рассказы/обложки/out/
