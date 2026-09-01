@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""Сборка обложек серии «Орбит-фронтальный переход» в стилистике канала «Прагматик».
+"""Сборка обложек серии «Как нейробиолог квартиры продавал» в стилистике канала «Прагматик».
 
   python3 build_covers.py             — собрать HTML всех глав в out/
   python3 build_covers.py --png       — плюс отрендерить PNG через headless Chrome
@@ -63,7 +63,7 @@ text-transform:uppercase;color:rgba(255,255,255,.5);line-height:1.6}}
 <div class="bleed"><i class="b1"></i><i class="b2"></i><i class="b3"></i></div>
 <div class="veil"><i class="b1"></i><i class="b2"></i><i class="b3"></i></div>
 
-<div class="top"><span>[ Орбит-фронтальный переход ]</span><span class="r">/ Глава {ch:02d}</span></div>
+<div class="top"><span>[ Как нейробиолог квартиры продавал ]</span><span class="r">/ Глава {ch:02d}</span></div>
 
 <div class="mid">
   <h1>{head}</h1>

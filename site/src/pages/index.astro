@@ -52,6 +52,7 @@ const latest = all.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
               sectionId={e.sectionId}
               date={e.data.date}
               type={e.data.type}
+              chapter={e.data.story?.chapter}
             />
           ))
         }

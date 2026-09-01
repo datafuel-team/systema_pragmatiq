@@ -749,3 +749,26 @@ a.next-chapter:hover { border-color: var(--text); border-left-color: var(--blue)
   line-height: 0;
 }
 .story-hero img { width: 100%; height: auto; display: block; }
+
+/* ---------- Метка серии ---------- */
+.story-series {
+  display: inline-block;
+  margin-top: 12px;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--blue);
+  border-bottom: 1px solid transparent;
+}
+.story-series:hover { border-bottom-color: var(--blue); }
+.mat-series {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.8px;
+  color: var(--muted);
+}

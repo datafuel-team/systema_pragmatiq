@@ -39,6 +39,7 @@ const items = (await getCollection(section.id, ({ data }) => !data.draft)).sort(
                 sectionId={section.id}
                 date={item.data.date}
                 type={item.data.type}
+                chapter={item.data.story?.chapter}
               />
             ))}
           </div>

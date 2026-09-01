@@ -2,7 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Related from '../../components/Related.astro';
-import { SECTIONS, SITE_NAME } from '../../lib/sections';
+import { SECTIONS, SITE_NAME, STORY_SERIES } from '../../lib/sections';
 
 export async function getStaticPaths() {
   const paths = [];
@@ -60,6 +60,13 @@ const shareText = `${d.title} — ${SITE_NAME}`;
           <span class="mat-date">{dateStr}</span>
         </div>
         <h1 style="font-size:30px; font-weight:700; line-height:1.2;">{d.title}</h1>
+        {
+          isStory && (
+            <a class="story-series" href={STORY_SERIES.href}>
+              ✦ Серия «{STORY_SERIES.title}» · глава {d.story.chapter} из {STORY_SERIES.total}
+            </a>
+          )
+        }
         {
           isStory ? (
             <p class="story-concept">{d.story.concept}</p>

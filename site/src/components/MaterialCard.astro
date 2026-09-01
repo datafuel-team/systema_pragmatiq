@@ -1,5 +1,5 @@
 ---
-import { SECTIONS } from '../lib/sections';
+import { SECTIONS, STORY_SERIES } from '../lib/sections';
 
 interface Props {
   href: string;
@@ -8,9 +8,12 @@ interface Props {
   sectionId: string;
   date?: Date;
   type?: string;
+  /** для рассказов — номер главы, чтобы карточка читалась как часть серии */
+  chapter?: number;
 }
 
-const { href, title, description, sectionId, date, type } = Astro.props;
+const { href, title, description, sectionId, date, type, chapter } = Astro.props;
+const isStory = type === 'story';
 const sectionTitle = SECTIONS.find((s) => s.id === sectionId)?.title ?? sectionId;
 const dateStr = date
   ? date.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' })
@@ -22,8 +25,10 @@ const dateStr = date
     <span class:list={['badge', type === 'tool' ? 'badge-lime' : 'badge-gray']}>
       {type === 'tool' ? 'Инструмент' : sectionTitle}
     </span>
+    {isStory && chapter && <span class="badge badge-blue">Глава {String(chapter).padStart(2, '0')}</span>}
     {dateStr && <span class="mat-date">{dateStr}</span>}
   </div>
   <div class="mat-card-title">{title}</div>
   <div class="mat-card-desc">{description}</div>
+  {isStory && <div class="mat-series">✦ Серия «{STORY_SERIES.title}»</div>}
 </a>
