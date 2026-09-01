@@ -1,63 +1,159 @@
-# Промты для Higgsfield — обложки серии «Орбит-фронтальный переход»
+# Промты Higgsfield — обложки серии «Орбит-фронтальный переход»
 
-Нужны, только если выбран **вариант A** (кадр в рамке): Higgsfield генерит картинку,
-она вставляется в брендовую рамку вместо векторной сцены.
+Главы 2–11. Первая уже сделана: из девяти вариантов взят `01_v2` — там пустые две трети
+кадра и всего три предмета. На этом и построены остальные промты.
 
-MCP higgsfield доступен из любой папки воркспейса (не только из `Хигсхилд/`).
-Рабочая связка: `generate_image_batch` → `jobs_wait` → скачать `result_url` в `img/`.
-Модель: `nano_banana_pro` (сервер маппит на nano_banana_2), `resolution: 2k`, `aspect_ratio: 4:5` → 1856×2304.
+## Как это работает
 
-## Базовый стиль (добавлять к каждому промту — он держит серию в одном ключе)
+Один кадр главы используется в двух форматах, поэтому композиция обязана быть одинаковой:
+
+- **превью 640×800** — берётся кадр целиком, сверху ложится заголовок на плашках;
+- **врезка в статью 1200×720** — берётся нижняя часть кадра, текста почти нет.
+
+Отсюда жёсткое правило: **верхние две трети пустые** (небо, туман, стена, бетон),
+**предмет в нижней трети, ближе к правому краю**. Если предмет окажется по центру или
+вверху — превью не соберётся, текст ляжет на него.
+
+Второе правило: **мало предметов**. В рабочем кадре первой главы их три — чашка, телефон,
+салфетка. Четыре уже много.
+
+## Порядок
+
+1. Прогнать промт, получить 6–9 вариантов.
+2. Сложить в `img/` как `NN_v1.png`, `NN_v2.png` … (NN — номер главы с нулём: `02_v1.png`).
+3. Сказать мне — я соберу контактный лист, выберу кадр по композиции и соберу оба формата.
+
+Ничего не переименовывать и не кропать руками: кроп делает сборка.
+
+---
+
+## Базовый блок стиля
+
+Добавлять к каждому промту без изменений — он держит серию в одном ключе:
 
 ```
-Editorial illustration for a satirical short story about real-estate marketing.
-Muted desaturated palette: warm beige #f4f3f1, cool grey-blue, soft cream light.
-One single accent object; everything else soft, hazy, low contrast.
-Early morning light after rain, wet surfaces, thin haze, no direct sun.
-No people, no faces. No text, no logos, no watermarks.
-Shallow depth of field, architectural photography feel, medium format look.
-Composition: empty upper third, subject in lower right, generous negative space.
+Editorial photography, medium format look, 85mm, shallow depth of field.
+Muted desaturated palette: warm beige, cool grey-blue, soft cream light.
+Overcast morning after rain, thin haze, wet surfaces, no direct sun, no harsh shadows.
+Empty upper two thirds of the frame, single subject in the lower third, slightly right of centre.
+Calm, quiet, understated. Very few objects in frame.
+No people, no faces, no hands. No text, no letters, no numbers, no signage, no logos, no watermarks.
 Aspect ratio 4:5.
 ```
 
-Кадры намеренно «недожатые»: это визуальный эквивалент того самого рендера,
-который Герман заказывает в первой главе — обещание вместо предмета.
+---
 
-## Кадр под каждую главу
+## Глава 02 — «Конформизм серого роя»
 
-| # | Глава | Сюжет кадра |
-|---|-------|-------------|
-| 1 | Дофаминовый замок | terrace stone table, a cup of coffee drunk one third, crumpled napkin, phone face down, blurred glass railing, hazy city dissolving into light |
-| 2 | Конформизм серого роя | five identical oversized grey hoodies on a concrete parapet, seen from behind, one empty space among them |
-| 3 | Универсальный гамбургер Шекспира | brass scales on a concrete slab: architectural model of a flat on one side, wine bottles on the other |
-| 4 | Привычка пить пустоту | phone on a bedside table, 10:00 Saturday, identical notification stack, dust in morning light |
-| 5 | Фрейминг сансары | window facing a blank boiler-house wall, thick soft curtain, warm lamp inside, deep shadow |
-| 6 | Окситоциновый туман | woollen plaid over an armchair arm, ceramic teapot, steam, unsanded larch wood surface |
-| 7 | Эффект священной кружки | fridge door with a single cheap souvenir magnet, one mug on an empty kitchen table |
-| 8 | Миндалина на страже ипотеки | mechanical split-flap counter in a dark hall, blurred numbers mid-flip, cold blue light |
-| 9 | Ловушка невозвратных инвестиций | thick cardboard folder with a name on the spine, papers stacked, hands absent, desk lamp |
-| 10 | Качели для Системы 1 и 2 | printed charts fanned on a table, one page in focus, coffee ring stain, glass of water |
-| 11 | Лобная кора говорит по-английски | golden dolphin scale model half-sunk in dark peat water, mist, cold morning |
+Про то, что покупают не квартиру, а соседей. Кадр — про одинаковость без единого человека.
 
-## Что делать с результатом
+```
+A rack with six identical oversized grey hoodies hanging in a row against a raw concrete wall,
+one hanger empty. Soft even light, dust in the air, industrial space.
+[+ базовый блок]
+```
 
-1. Сгенерировать 4:5, сохранить в `рассказы/обложки/img/NN.jpg`.
-2. В `NN_<глава>.html` заменить блок `.frame` на `<img src="img/NN.jpg">` (рамка, поля и подпись остаются).
-3. Отрендерить PNG:
-   `"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless --force-device-scale-factor=2 --window-size=640,800 --screenshot=NN.png <url>`
+## Глава 03 — «Универсальный гамбургер Шекспира»
 
-## Что выяснилось на первом прогоне (31.08.2026)
+Про единую шкалу ценности: метры переводят в годы работы и бутылки вина.
 
-Проверено на 9 кадрах первой главы (`img/01_v1..v9.png`, контактный лист — `01_варианты.png`).
+```
+Small brass balance scales on a wet stone surface: a plain grey concrete cube on one pan,
+a single wine glass on the other. Hazy window light behind, everything else empty.
+[+ базовый блок]
+```
 
-- **Базовый стиль-блок держит палитру, но не держит реквизит.** Модель дорисовывает
-  «уместные» предметы: табличку FOR SALE с текстом (v1) и брелок-домик (v4). В промт
-  обязателен явный стоп-лист: `Nothing else on the table: no signs, no placards,
-  no keychains, no toys, no props, no lettering of any kind.`
-- **«Drunk one third» читается как «допита».** Писать прямо: `still two thirds full`.
-- **`cinematic_studio_2_5` уводит в ночь и цветное боке** (v5) — для этой серии не годится,
-  палитра ломается. Оставляем `nano_banana_pro`.
-- **`phone lying face down` не воспроизводится** — тёмный прямоугольник читается одинаково
-  в обе стороны, капслок и «screen hidden» не помогают. На размере обложки разницы нет,
-  бороться не стоит.
-- Композиция «empty upper third + subject lower right» отрабатывает стабильно, кроп под рамку не нужен.
+## Глава 04 — «Привычка пить пустоту»
+
+Про субботнюю СМС в десять утра, покупку на автомате.
+
+```
+A plain analogue alarm clock showing ten o'clock on an empty bedside table,
+morning light through a curtain, dust floating in the beam. Nothing else on the table.
+[+ базовый блок]
+```
+
+## Глава 05 — «Фрейминг сансары»
+
+Про первые этажи у котельной, проданные как апартаменты для глубокого сна.
+
+```
+A window facing a blank concrete wall two metres away, heavy linen curtain half drawn,
+a warm table lamp glowing inside the room. Deep quiet shadow, cold light outside.
+[+ базовый блок]
+```
+
+## Глава 06 — «Окситоциновый туман»
+
+Про офис продаж, где клиента укутывают в плед и поят чаем.
+
+```
+A thick wool blanket thrown over the arm of an armchair, a ceramic teapot with faint steam
+on unsanded larch wood. Warm soft light, textile texture, empty space above.
+[+ базовый блок]
+```
+
+## Глава 07 — «Эффект священной кружки»
+
+Про магнит на чужом холодильнике и присвоение до сделки.
+
+```
+A clean white fridge door with a single small cheap ceramic souvenir magnet on it,
+nothing else. Flat daylight, minimal composition, large empty white field above.
+[+ базовый блок]
+```
+
+## Глава 08 — «Миндалина на страже ипотеки»
+
+Про таймер обратного отсчёта, который обгоняет расчёт.
+
+```
+A mechanical split-flap display board in a dark empty hall, flaps blurred mid-flip,
+cold blue light, no readable characters. Deep shadow, single point of focus.
+[+ базовый блок]
+```
+
+## Глава 09 — «Ловушка невозвратных инвестиций»
+
+Про папку с именем клиента, которая тяжелеет и держит крепче договора.
+
+```
+A thick worn cardboard folder tied with cloth ribbons on a desk, a stack of papers beside it,
+one desk lamp lighting it from the side. No hands, no readable text on the papers.
+[+ базовый блок]
+```
+
+## Глава 10 — «Качели для Системы 1 и 2»
+
+Про папку графиков, которой оправдывают уже принятое решение.
+
+```
+Printed charts fanned out on a table, abstract line graphs with no readable labels,
+one sheet in focus, a dried coffee ring stain on the paper, a glass of water at the edge.
+[+ базовый блок]
+```
+
+## Глава 11 — «Лобная кора говорит по-английски»
+
+Про золотого дельфина на болоте, которого совет директоров всё-таки не построил.
+
+```
+A small golden dolphin scale model half sunk in dark peat water, mist over the surface,
+cold early morning, reeds barely visible in the haze. Still water, muted gold reflection.
+[+ базовый блок]
+```
+
+---
+
+## Если кадр не выходит
+
+- **Предмет уехал в центр или вверх** — добавить в конец: `subject strictly in the lower right
+  quadrant, top two thirds completely empty`.
+- **Слишком много предметов** — `only two objects in the entire frame, nothing else`.
+- **Лезет текст на табличках и бумагах** — усилить: `absolutely no text, no letters, no numbers
+  anywhere in the image, blank surfaces`.
+- **Кадр слишком контрастный и рекламный** — `flat lighting, low contrast, faded film look,
+  no glossy advertising aesthetics`.
+
+Смысл серии в том, что кадры намеренно «недожатые»: это визуальный эквивалент того самого
+рендера, который Герман заказывает в первой главе, — обещание вместо предмета.
