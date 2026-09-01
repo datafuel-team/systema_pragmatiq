@@ -12,12 +12,35 @@ interface Props {
   ogImage?: string;
   publishedAt?: string;
   updatedAt?: string;
-  /** подпись рядом с логотипом в топбаре */
+  /** простая подпись в топбаре (без ссылки) */
   crumb?: string;
+  /** крошки со ссылками: [{label, href?}]; последняя — текущая страница */
+  crumbs?: { label: string; href?: string }[];
 }
 
-const { title, description, rawTitle, noindex, ogImage, publishedAt, updatedAt, crumb } =
+const { title, description, rawTitle, noindex, ogImage, publishedAt, updatedAt, crumb, crumbs } =
   Astro.props;
+
+const crumbItems = crumbs ?? (crumb ? [{ label: crumb }] : []);
+
+// BreadcrumbList для поисковиков: Главная + переданные крошки
+const SITE = 'https://sistema.pragmatiq.online';
+const breadcrumbSchema =
+  crumbItems.length > 0
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Главная', item: `${SITE}/` },
+          ...crumbItems.map((c, i) => ({
+            '@type': 'ListItem',
+            position: i + 2,
+            name: c.label,
+            ...(c.href ? { item: `${SITE}${c.href}` } : {}),
+          })),
+        ],
+      }
+    : null;
 ---
 
 <!doctype html>
@@ -44,7 +67,19 @@ const { title, description, rawTitle, noindex, ogImage, publishedAt, updatedAt, 
   <body>
     <header class="topbar">
       <button class="nav-expand" id="nav-expand" aria-label="Открыть меню" title="Открыть меню">›</button>
-      {crumb && <span class="topbar-title">{crumb}</span>}
+      {
+        crumbItems.length > 0 && (
+          <nav class="topbar-crumbs" aria-label="Хлебные крошки">
+            <a href="/">Главная</a>
+            {crumbItems.map((c) => (
+              <>
+                <span class="crumb-sep">/</span>
+                {c.href ? <a href={c.href}>{c.label}</a> : <span class="crumb-cur">{c.label}</span>}
+              </>
+            ))}
+          </nav>
+        )
+      }
       <a class="topbar-cta" href="/login/">↳ Войти</a>
     </header>
 
@@ -62,6 +97,8 @@ const { title, description, rawTitle, noindex, ogImage, publishedAt, updatedAt, 
         <span style="margin-left:auto">{SITE_NAME}</span>
       </footer>
     </div>
+
+    {breadcrumbSchema && <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />}
 
     <script>
       const expandBtn = document.getElementById('nav-expand');

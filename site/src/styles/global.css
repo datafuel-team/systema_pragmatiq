@@ -60,12 +60,25 @@ img { max-width: 100%; height: auto; }
 }
 .nav-expand:hover { border-color: var(--blue); color: var(--blue); }
 body.nav-collapsed .nav-expand { display: flex; }
-.topbar-title {
+.topbar-crumbs {
   font-family: var(--mono);
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 1px;
   color: var(--muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+.topbar-crumbs a { color: var(--muted); flex-shrink: 0; }
+.topbar-crumbs a:hover { color: var(--blue); }
+.topbar-crumbs .crumb-sep { color: var(--border); flex-shrink: 0; }
+.topbar-crumbs .crumb-cur {
+  color: var(--text);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -822,19 +835,16 @@ a.next-chapter:hover { border-color: var(--text); border-left-color: var(--blue)
 }
 
 
-/* ---------- Шапка материала: мета-панель ---------- */
-.mat-head {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 20px 48px;
-  align-items: start;
-  margin-bottom: 24px;
-}
+/* ---------- Шапка материала: мета-панель под заголовком ---------- */
+.mat-head { margin-bottom: 24px; }
 .meta-panel {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(120px, max-content));
-  gap: 14px 32px;
-  padding-top: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px 44px;
+  border-top: 1px solid var(--border);
+  margin-top: 20px;
+  padding-top: 16px;
+  max-width: 720px;
 }
 .meta-item .m-lbl {
   font-family: var(--mono);
@@ -844,10 +854,9 @@ a.next-chapter:hover { border-color: var(--text); border-left-color: var(--blue)
   color: var(--muted);
   margin-bottom: 3px;
 }
-.meta-item .m-val { font-size: 13px; font-weight: 500; max-width: 220px; }
+.meta-item .m-val { font-size: 13px; font-weight: 500; }
 @media (max-width: 900px) {
-  .mat-head { grid-template-columns: 1fr; }
-  .meta-panel { border-top: 1px solid var(--border); padding-top: 14px; }
+  .meta-panel { gap: 12px 28px; }
 }
 
 /* ---------- «Коротко» перед текстом ---------- */

@@ -26,7 +26,7 @@ const chipTags = [...tagCounts.entries()]
 const showChips = items.length >= 4 && chipTags.length >= 2;
 ---
 
-<Base title={section.title} description={section.description} crumb={section.title}>
+<Base title={section.title} description={section.description} crumbs={[{ label: section.title }]}>
   <div class="content">
     <div class="page-head">
       <div class="page-head-eyebrow">
