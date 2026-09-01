@@ -6,6 +6,11 @@ updated: 2026-09-01
 type: tool
 tags: [утп, креатив, позиционирование, инструмент]
 related: [products/ii-audit]
+meta:
+  - { label: "Формат", value: "интерактивная таблица" }
+  - { label: "База", value: "165 УТП · 10 групп" }
+  - { label: "Классы жилья", value: "5 по РГР" }
+  - { label: "Доступ", value: "бесплатно" }
 tool:
   src: /tools/utp/index.html?v=2026-09-01
 ---

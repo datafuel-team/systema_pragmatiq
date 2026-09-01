@@ -15,6 +15,15 @@ const items = (await getCollection(section.id, ({ data }) => !data.draft)).sort(
     ? (a.data.story?.chapter ?? 0) - (b.data.story?.chapter ?? 0)
     : b.data.date.valueOf() - a.data.date.valueOf()
 );
+const tagCounts = new Map<string, number>();
+for (const item of items)
+  for (const t of item.data.tags ?? []) tagCounts.set(t, (tagCounts.get(t) ?? 0) + 1);
+// чипы имеют смысл, когда есть из чего выбирать
+const chipTags = [...tagCounts.entries()]
+  .filter(([, n]) => n >= 2)
+  .sort((a, b) => b[1] - a[1])
+  .map(([t]) => t);
+const showChips = items.length >= 4 && chipTags.length >= 2;
 ---
 
 <Base title={section.title} description={section.description} crumb={section.title}>
@@ -25,6 +34,20 @@ const items = (await getCollection(section.id, ({ data }) => !data.draft)).sort(
       </div>
       <h1 class="page-head-title">{section.title}</h1>
       <p class="page-head-sub">{section.description}</p>
+      {
+        showChips && (
+          <div class="chips" id="chips">
+            <button class="chip on" type="button" data-tag="">
+              Все · {items.length}
+            </button>
+            {chipTags.map((t) => (
+              <button class="chip" type="button" data-tag={t}>
+                {t} · {tagCounts.get(t)}
+              </button>
+            ))}
+          </div>
+        )
+      }
     </div>
 
     <div class="section">
@@ -32,15 +55,17 @@ const items = (await getCollection(section.id, ({ data }) => !data.draft)).sort(
         items.length > 0 ? (
           <div class="mat-grid">
             {items.map((item) => (
-              <MaterialCard
-                href={`/${section.id}/${item.id}/`}
-                title={item.data.title}
-                description={item.data.description}
-                sectionId={section.id}
-                date={item.data.date}
-                type={item.data.type}
-                chapter={item.data.story?.chapter}
-              />
+              <div class="mat-cell" data-tags={(item.data.tags ?? []).join('|')}>
+                <MaterialCard
+                  href={`/${section.id}/${item.id}/`}
+                  title={item.data.title}
+                  description={item.data.description}
+                  sectionId={section.id}
+                  date={item.data.date}
+                  type={item.data.type}
+                  chapter={item.data.story?.chapter}
+                />
+              </div>
             ))}
           </div>
         ) : (
@@ -53,3 +78,20 @@ const items = (await getCollection(section.id, ({ data }) => !data.draft)).sort(
     </div>
   </div>
 </Base>
+
+<script>
+  // фильтр по тегу: один активный чип, «Все» сбрасывает
+  const chips = document.querySelectorAll('#chips .chip');
+  const cells = document.querySelectorAll('.mat-cell');
+  chips.forEach((chip) => {
+    chip.addEventListener('click', () => {
+      chips.forEach((c) => c.classList.remove('on'));
+      chip.classList.add('on');
+      const tag = (chip as HTMLElement).dataset.tag ?? '';
+      cells.forEach((cell) => {
+        const tags = ((cell as HTMLElement).dataset.tags ?? '').split('|');
+        (cell as HTMLElement).hidden = Boolean(tag) && !tags.includes(tag);
+      });
+    });
+  });
+</script>

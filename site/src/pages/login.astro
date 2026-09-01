@@ -1,0 +1,32 @@
+---
+import Base from '../layouts/Base.astro';
+import { CONTACTS } from '../lib/sections';
+---
+
+<Base
+  title="Вход"
+  description="Вход в закрытую часть Системы прагматичного маркетинга недвижимости — через Telegram."
+  noindex
+  crumb="Вход"
+>
+  <div class="content" style="max-width:640px;">
+    <div class="page-head">
+      <div class="page-head-eyebrow"><span>✦</span> Закрытая часть</div>
+      <h1 class="page-head-title" style="font-size:34px;">Вход через Telegram</h1>
+      <p class="page-head-sub">
+        В закрытой части — рабочие материалы для клиентов и подписчиков: коммерческие
+        предложения и аналитические разборы из рассылок.
+      </p>
+    </div>
+
+    <div class="card" style="margin-top:24px;">
+      <div class="card-title">Как это будет работать</div>
+      <p style="font-size:14px; margin-bottom:16px;">
+        Вход — в один клик через телеграм-бота, без паролей и почты. Бот запускается
+        в ближайшее время. Чтобы не пропустить открытие закрытой части — подпишитесь
+        на канал агентства.
+      </p>
+      <a class="btn btn-lime" href={CONTACTS.telegram} rel="noopener">↳ Подписаться на канал</a>
+    </div>
+  </div>
+</Base>

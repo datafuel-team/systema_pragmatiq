@@ -25,7 +25,7 @@ export async function getStaticPaths() {
 }
 
 const { entry, section, next } = Astro.props;
-const { Content } = await render(entry);
+const { Content, headings } = await render(entry);
 const d = entry.data;
 const dateStr = d.date.toLocaleDateString('ru-RU', {
   day: 'numeric',
@@ -34,6 +34,8 @@ const dateStr = d.date.toLocaleDateString('ru-RU', {
 });
 const isTool = d.type === 'tool' && d.tool;
 const isStory = d.type === 'story' && !!d.story;
+const toc = !isStory && !isTool ? headings.filter((h) => h.depth === 2) : [];
+const showToc = toc.length >= 5;
 const shareUrl = new URL(Astro.url.pathname, 'https://sistema.pragmatiq.online').href;
 const shareText = `${d.title} — ${SITE_NAME}`;
 ---
@@ -48,35 +50,78 @@ const shareText = `${d.title} — ${SITE_NAME}`;
 >
   <div class="content">
     <article>
-      <header style="margin-bottom:24px;">
-        <div class="mat-card-meta" style="margin-bottom:12px;">
-          <a class="badge badge-gray" href={`/${section.id}/`}>{section.title}</a>
-          {isTool && <span class="badge badge-lime">Инструмент</span>}
-          {isStory && (
-            <span class="badge badge-blue">
-              Глава {String(d.story.chapter).padStart(2, '0')}
-            </span>
-          )}
-          <span class="mat-date">{dateStr}</span>
+      <a class="back-link" href={`/${section.id}/`}>← {section.title}</a>
+      <header class="mat-head">
+        <div>
+          <div class="mat-card-meta" style="margin-bottom:12px;">
+            <a class="badge badge-gray" href={`/${section.id}/`}>{section.title}</a>
+            {isTool && <span class="badge badge-lime">Инструмент</span>}
+            {isStory && (
+              <span class="badge badge-blue">
+                Глава {String(d.story.chapter).padStart(2, '0')}
+              </span>
+            )}
+            <span class="mat-date">{dateStr}</span>
+          </div>
+          <h1 style="font-size:30px; font-weight:700; line-height:1.2;">{d.title}</h1>
+          {
+            isStory && (
+              <a class="story-series" href={STORY_SERIES.href}>
+                ✦ Серия «{STORY_SERIES.title}» · глава {d.story.chapter} из {STORY_SERIES.total}
+              </a>
+            )
+          }
+          {
+            isStory ? (
+              <p class="story-concept">{d.story.concept}</p>
+            ) : (
+              <p style="font-size:16px; color:var(--muted); margin-top:10px; max-width:720px;">
+                {d.description}
+              </p>
+            )
+          }
         </div>
-        <h1 style="font-size:30px; font-weight:700; line-height:1.2;">{d.title}</h1>
         {
-          isStory && (
-            <a class="story-series" href={STORY_SERIES.href}>
-              ✦ Серия «{STORY_SERIES.title}» · глава {d.story.chapter} из {STORY_SERIES.total}
-            </a>
-          )
-        }
-        {
-          isStory ? (
-            <p class="story-concept">{d.story.concept}</p>
-          ) : (
-            <p style="font-size:16px; color:var(--muted); margin-top:10px; max-width:720px;">
-              {d.description}
-            </p>
+          d.meta.length > 0 && (
+            <div class="meta-panel">
+              {d.meta.map((m) => (
+                <div class="meta-item">
+                  <div class="m-lbl">{m.label}</div>
+                  <div class="m-val">{m.value}</div>
+                </div>
+              ))}
+            </div>
           )
         }
       </header>
+
+      {
+        d.tldr.length > 0 && (
+          <div class="tldr">
+            <span class="tldr-tag">Коротко</span>
+            <ul>
+              {d.tldr.map((t) => (
+                <li>{t}</li>
+              ))}
+            </ul>
+          </div>
+        )
+      }
+
+      {
+        showToc && (
+          <details class="toc">
+            <summary>Содержание · {toc.length} разделов</summary>
+            <ol>
+              {toc.map((h) => (
+                <li>
+                  <a href={`#${h.slug}`}>{h.text}</a>
+                </li>
+              ))}
+            </ol>
+          </details>
+        )
+      }
 
       {
         isStory && d.cover && (

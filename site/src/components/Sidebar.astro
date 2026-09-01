@@ -21,6 +21,16 @@ const sectionOpen = (id: string) => current.startsWith(`/${id}`);
 ---
 
 <aside class="sidebar" id="sidebar">
+  <div class="sidebar-head">
+    <a class="side-logo" href="/">
+      <span class="spark">✦</span>
+      <span>
+        <b>ПРАГМАТИК</b>
+        <small>система маркетинга</small>
+      </span>
+    </a>
+    <button class="nav-collapse" id="nav-collapse" aria-label="Свернуть меню" title="Свернуть меню">‹</button>
+  </div>
   <nav class="sidebar-nav" aria-label="Разделы">
     <a class="side-home" href="/">
       <span class="spark">✦</span>
@@ -52,11 +62,8 @@ const sectionOpen = (id: string) => current.startsWith(`/${id}`);
     }
   </nav>
   <div class="sidebar-contacts">
-    <div class="c-label">Контакты</div>
-    <a href={CONTACTS.telegram} rel="noopener">↳ Написать в телеграм</a>
-    <a href={`mailto:${CONTACTS.email}`}>{CONTACTS.email}</a>
-    <a href={`tel:${CONTACTS.phone.replace(/[^+\d]/g, '')}`}>{CONTACTS.phone}</a>
-    <a href={CONTACTS.site} rel="noopener">{CONTACTS.siteLabel}</a>
+    <a href={CONTACTS.telegram} rel="noopener">↳ Подписаться на канал <span class="c-sub">{CONTACTS.telegramLabel}</span></a>
+    <a href={CONTACTS.site} rel="noopener">↳ Сайт агентства <span class="c-sub">{CONTACTS.siteLabel}</span></a>
   </div>
 </aside>
 

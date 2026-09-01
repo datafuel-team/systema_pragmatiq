@@ -9,6 +9,10 @@ const material = z.object({
   date: z.coerce.date(),
   updated: z.coerce.date().optional(),
   tags: z.array(z.string()).default([]),
+  /** мета-панель в шапке материала: [{label, value}] */
+  meta: z.array(z.object({ label: z.string(), value: z.string() })).default([]),
+  /** «Коротко»: 3–6 тезисов перед текстом */
+  tldr: z.array(z.string()).default([]),
   related: z.array(z.string()).default([]),
   type: z
     .enum(['article', 'tool', 'case', 'product', 'principle', 'blog', 'kb', 'story'])

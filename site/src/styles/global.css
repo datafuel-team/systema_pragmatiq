@@ -45,31 +45,21 @@ img { max-width: 100%; height: auto; }
   gap: 14px;
   border-bottom: 1px solid var(--border);
 }
-.nav-arrow {
+.nav-expand {
   background: var(--white);
   border: 1px solid var(--border);
   color: var(--text);
   font-family: var(--mono);
-  font-size: 15px;
-  width: 32px; height: 32px;
+  font-size: 14px;
+  width: 30px; height: 30px;
   cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
-  transition: border-color 0.15s;
-}
-.nav-arrow:hover { border-color: var(--text); }
-.nav-arrow .arr { display: inline-block; transition: transform 0.2s; }
-body.nav-collapsed .nav-arrow .arr { transform: rotate(180deg); }
-.topbar-logo {
-  font-size: 15px;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-  color: var(--text);
-  white-space: nowrap;
-  display: flex;
+  display: none;
   align-items: center;
-  gap: 8px;
+  justify-content: center;
+  transition: border-color 0.15s, color 0.15s;
 }
-.topbar-logo .spark { color: var(--blue); font-size: 16px; }
+.nav-expand:hover { border-color: var(--blue); color: var(--blue); }
+body.nav-collapsed .nav-expand { display: flex; }
 .topbar-title {
   font-family: var(--mono);
   font-size: 11px;
@@ -96,6 +86,56 @@ body.nav-collapsed .nav-arrow .arr { transform: rotate(180deg); }
 .topbar-cta:hover { background: var(--blue); color: var(--white); }
 
 /* ---------- Сайдбар ---------- */
+.sidebar-head {
+  display: flex;
+  align-items: center;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+.side-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+.side-logo .spark { color: var(--blue); font-size: 18px; }
+.side-logo b {
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  line-height: 1.1;
+}
+.side-logo small {
+  display: block;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 2px;
+}
+.nav-collapse {
+  position: absolute;
+  right: -13px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 26px; height: 26px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 13px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 160;
+  transition: border-color 0.15s, color 0.15s;
+}
+.nav-collapse:hover { border-color: var(--blue); color: var(--blue); }
 .sidebar {
   position: fixed;
   top: var(--topbar-h);
@@ -198,7 +238,7 @@ body.nav-collapsed .nav-arrow .arr { transform: rotate(180deg); }
 }
 .sidebar-contacts a {
   display: block;
-  padding: 3px 0;
+  padding: 4px 0;
   font-family: var(--mono);
   font-size: 11px;
   letter-spacing: 0.5px;
@@ -206,6 +246,13 @@ body.nav-collapsed .nav-arrow .arr { transform: rotate(180deg); }
   color: var(--text);
 }
 .sidebar-contacts a:hover { color: var(--blue); }
+.sidebar-contacts .c-sub {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--muted);
+  text-transform: none;
+  letter-spacing: 0.3px;
+}
 
 /* ---------- Раскладка ---------- */
 .layout {
@@ -434,6 +481,7 @@ tr:last-child td { border-bottom: none; }
 .mobile-gate { display: none; }
 
 @media (max-width: 900px) {
+  .nav-expand { display: flex; }
   .layout { padding-left: 0; }
   .sidebar { transform: translateX(-100%); }
   body.nav-open .sidebar { transform: translateX(0); box-shadow: 4px 0 24px rgba(0,0,0,0.12); }
@@ -772,3 +820,168 @@ a.next-chapter:hover { border-color: var(--text); border-left-color: var(--blue)
   letter-spacing: 0.8px;
   color: var(--muted);
 }
+
+
+/* ---------- Шапка материала: мета-панель ---------- */
+.mat-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 20px 48px;
+  align-items: start;
+  margin-bottom: 24px;
+}
+.meta-panel {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(120px, max-content));
+  gap: 14px 32px;
+  padding-top: 8px;
+}
+.meta-item .m-lbl {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 3px;
+}
+.meta-item .m-val { font-size: 13px; font-weight: 500; max-width: 220px; }
+@media (max-width: 900px) {
+  .mat-head { grid-template-columns: 1fr; }
+  .meta-panel { border-top: 1px solid var(--border); padding-top: 14px; }
+}
+
+/* ---------- «Коротко» перед текстом ---------- */
+.tldr {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--lime);
+  padding: 16px 20px;
+  margin: 0 0 28px;
+  max-width: 720px;
+}
+.tldr-tag {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--blue);
+  display: block;
+  margin-bottom: 8px;
+}
+.tldr ul { margin: 0 0 0 18px; }
+.tldr li { font-size: 14px; margin-bottom: 5px; }
+.tldr li:last-child { margin-bottom: 0; }
+
+/* ---------- Было → Стало ---------- */
+.compare {
+  border: 1px solid var(--border);
+  background: var(--white);
+  margin: 24px 0;
+  max-width: 720px;
+}
+.compare-head {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid var(--border);
+}
+.compare-head span {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 10px 18px;
+}
+.compare-head span + span { border-left: 1px solid var(--border); color: var(--blue); }
+.compare-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid var(--border);
+}
+.compare-row:last-child { border-bottom: none; }
+.compare-row .was { padding: 14px 18px; font-size: 14px; color: var(--muted); }
+.compare-row .now { padding: 14px 18px; font-size: 14px; border-left: 1px solid var(--border); }
+@media (max-width: 900px) {
+  .compare-head { display: none; }
+  .compare-row { grid-template-columns: 1fr; }
+  .compare-row .now { border-left: none; border-top: 1px dashed var(--border); }
+  .compare-row .was::before, .compare-row .now::before {
+    font-family: var(--mono); font-size: 9px; font-weight: 700;
+    letter-spacing: 1px; text-transform: uppercase; display: block; margin-bottom: 4px;
+  }
+  .compare-row .was::before { content: 'Было'; color: var(--muted); }
+  .compare-row .now::before { content: 'Стало'; color: var(--blue); }
+}
+
+/* ---------- Оглавление лонгрида ---------- */
+.toc {
+  border: 1px solid var(--border);
+  background: var(--white);
+  margin: 0 0 28px;
+  max-width: 720px;
+}
+.toc summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 12px 20px;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  user-select: none;
+}
+.toc summary::-webkit-details-marker { display: none; }
+.toc summary::after { content: '▸'; font-size: 10px; margin-left: auto; transition: transform 0.15s; }
+.toc[open] summary::after { transform: rotate(90deg); }
+.toc summary:hover { color: var(--blue); }
+.toc ol { list-style: none; margin: 0; padding: 2px 20px 14px; counter-reset: tocn; }
+.toc li { counter-increment: tocn; padding: 4px 0; font-size: 13px; }
+.toc li::before {
+  content: counter(tocn, decimal-leading-zero);
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--blue);
+  margin-right: 12px;
+}
+.toc a:hover { color: var(--blue); }
+
+/* ---------- Назад к разделу ---------- */
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 20px;
+}
+.back-link:hover { color: var(--blue); }
+
+/* ---------- Чипы-фильтры витрины ---------- */
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 24px 0 4px; }
+.chip {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  padding: 6px 12px;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  background: var(--white);
+  color: #444;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+}
+.chip:hover { border-color: var(--blue); color: var(--blue); }
+.chip.on { background: var(--lime); border-color: var(--lime); color: var(--text); }
+.mat-cell { display: contents; }
+.mat-cell[hidden] { display: none; }
