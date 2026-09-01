@@ -29,7 +29,8 @@
 
 ## Базовый блок стиля
 
-Добавлять к каждому промту без изменений — он держит серию в одном ключе:
+Уже вшит в каждый промт ниже — копировать блок главы целиком, ничего не дописывая.
+Здесь приведён отдельно, чтобы было понятно, что именно держит серию в одном ключе:
 
 ```
 Editorial photography, medium format look, 85mm, shallow depth of field.
@@ -50,7 +51,14 @@ Aspect ratio 4:5.
 ```
 A rack with six identical oversized grey hoodies hanging in a row against a raw concrete wall,
 one hanger empty. Soft even light, dust in the air, industrial space.
-[+ базовый блок]
+
+Editorial photography, medium format look, 85mm, shallow depth of field.
+Muted desaturated palette: warm beige, cool grey-blue, soft cream light.
+Overcast morning after rain, thin haze, wet surfaces, no direct sun, no harsh shadows.
+Empty upper two thirds of the frame, single subject in the lower third, slightly right of centre.
+Calm, quiet, understated. Very few objects in frame.
+No people, no faces, no hands. No text, no letters, no numbers, no signage, no logos, no watermarks.
+Aspect ratio 4:5.
 ```
 
 ## Глава 03 — «Универсальный гамбургер Шекспира»
@@ -60,7 +68,14 @@ one hanger empty. Soft even light, dust in the air, industrial space.
 ```
 Small brass balance scales on a wet stone surface: a plain grey concrete cube on one pan,
 a single wine glass on the other. Hazy window light behind, everything else empty.
-[+ базовый блок]
+
+Editorial photography, medium format look, 85mm, shallow depth of field.
+Muted desaturated palette: warm beige, cool grey-blue, soft cream light.
+Overcast morning after rain, thin haze, wet surfaces, no direct sun, no harsh shadows.
+Empty upper two thirds of the frame, single subject in the lower third, slightly right of centre.
+Calm, quiet, understated. Very few objects in frame.
+No people, no faces, no hands. No text, no letters, no numbers, no signage, no logos, no watermarks.
+Aspect ratio 4:5.
 ```
 
 ## Глава 04 — «Привычка пить пустоту»
@@ -70,7 +85,14 @@ a single wine glass on the other. Hazy window light behind, everything else empt
 ```
 A plain analogue alarm clock showing ten o'clock on an empty bedside table,
 morning light through a curtain, dust floating in the beam. Nothing else on the table.
-[+ базовый блок]
+
+Editorial photography, medium format look, 85mm, shallow depth of field.
+Muted desaturated palette: warm beige, cool grey-blue, soft cream light.
+Overcast morning after rain, thin haze, wet surfaces, no direct sun, no harsh shadows.
+Empty upper two thirds of the frame, single subject in the lower third, slightly right of centre.
+Calm, quiet, understated. Very few objects in frame.
+No people, no faces, no hands. No text, no letters, no numbers, no signage, no logos, no watermarks.
+Aspect ratio 4:5.
 ```
 
 ## Глава 05 — «Фрейминг сансары»
@@ -80,7 +102,14 @@ morning light through a curtain, dust floating in the beam. Nothing else on the 
 ```
 A window facing a blank concrete wall two metres away, heavy linen curtain half drawn,
 a warm table lamp glowing inside the room. Deep quiet shadow, cold light outside.
-[+ базовый блок]
+
+Editorial photography, medium format look, 85mm, shallow depth of field.
+Muted desaturated palette: warm beige, cool grey-blue, soft cream light.
+Overcast morning after rain, thin haze, wet surfaces, no direct sun, no harsh shadows.
+Empty upper two thirds of the frame, single subject in the lower third, slightly right of centre.
+Calm, quiet, understated. Very few objects in frame.
+No people, no faces, no hands. No text, no letters, no numbers, no signage, no logos, no watermarks.
+Aspect ratio 4:5.
 ```
 
 ## Глава 06 — «Окситоциновый туман»
@@ -90,7 +119,14 @@ a warm table lamp glowing inside the room. Deep quiet shadow, cold light outside
 ```
 A thick wool blanket thrown over the arm of an armchair, a ceramic teapot with faint steam
 on unsanded larch wood. Warm soft light, textile texture, empty space above.
-[+ базовый блок]
+
+Editorial photography, medium format look, 85mm, shallow depth of field.
+Muted desaturated palette: warm beige, cool grey-blue, soft cream light.
+Overcast morning after rain, thin haze, wet surfaces, no direct sun, no harsh shadows.
+Empty upper two thirds of the frame, single subject in the lower third, slightly right of centre.
+Calm, quiet, understated. Very few objects in frame.
+No people, no faces, no hands. No text, no letters, no numbers, no signage, no logos, no watermarks.
+Aspect ratio 4:5.
 ```
 
 ## Глава 07 — «Эффект священной кружки»
@@ -100,7 +136,14 @@ on unsanded larch wood. Warm soft light, textile texture, empty space above.
 ```
 A clean white fridge door with a single small cheap ceramic souvenir magnet on it,
 nothing else. Flat daylight, minimal composition, large empty white field above.
-[+ базовый блок]
+
+Editorial photography, medium format look, 85mm, shallow depth of field.
+Muted desaturated palette: warm beige, cool grey-blue, soft cream light.
+Overcast morning after rain, thin haze, wet surfaces, no direct sun, no harsh shadows.
+Empty upper two thirds of the frame, single subject in the lower third, slightly right of centre.
+Calm, quiet, understated. Very few objects in frame.
+No people, no faces, no hands. No text, no letters, no numbers, no signage, no logos, no watermarks.
+Aspect ratio 4:5.
 ```
 
 ## Глава 08 — «Миндалина на страже ипотеки»
@@ -110,7 +153,14 @@ nothing else. Flat daylight, minimal composition, large empty white field above.
 ```
 A mechanical split-flap display board in a dark empty hall, flaps blurred mid-flip,
 cold blue light, no readable characters. Deep shadow, single point of focus.
-[+ базовый блок]
+
+Editorial photography, medium format look, 85mm, shallow depth of field.
+Muted desaturated palette: warm beige, cool grey-blue, soft cream light.
+Overcast morning after rain, thin haze, wet surfaces, no direct sun, no harsh shadows.
+Empty upper two thirds of the frame, single subject in the lower third, slightly right of centre.
+Calm, quiet, understated. Very few objects in frame.
+No people, no faces, no hands. No text, no letters, no numbers, no signage, no logos, no watermarks.
+Aspect ratio 4:5.
 ```
 
 ## Глава 09 — «Ловушка невозвратных инвестиций»
@@ -120,7 +170,14 @@ cold blue light, no readable characters. Deep shadow, single point of focus.
 ```
 A thick worn cardboard folder tied with cloth ribbons on a desk, a stack of papers beside it,
 one desk lamp lighting it from the side. No hands, no readable text on the papers.
-[+ базовый блок]
+
+Editorial photography, medium format look, 85mm, shallow depth of field.
+Muted desaturated palette: warm beige, cool grey-blue, soft cream light.
+Overcast morning after rain, thin haze, wet surfaces, no direct sun, no harsh shadows.
+Empty upper two thirds of the frame, single subject in the lower third, slightly right of centre.
+Calm, quiet, understated. Very few objects in frame.
+No people, no faces, no hands. No text, no letters, no numbers, no signage, no logos, no watermarks.
+Aspect ratio 4:5.
 ```
 
 ## Глава 10 — «Качели для Системы 1 и 2»
@@ -130,7 +187,14 @@ one desk lamp lighting it from the side. No hands, no readable text on the paper
 ```
 Printed charts fanned out on a table, abstract line graphs with no readable labels,
 one sheet in focus, a dried coffee ring stain on the paper, a glass of water at the edge.
-[+ базовый блок]
+
+Editorial photography, medium format look, 85mm, shallow depth of field.
+Muted desaturated palette: warm beige, cool grey-blue, soft cream light.
+Overcast morning after rain, thin haze, wet surfaces, no direct sun, no harsh shadows.
+Empty upper two thirds of the frame, single subject in the lower third, slightly right of centre.
+Calm, quiet, understated. Very few objects in frame.
+No people, no faces, no hands. No text, no letters, no numbers, no signage, no logos, no watermarks.
+Aspect ratio 4:5.
 ```
 
 ## Глава 11 — «Лобная кора говорит по-английски»
@@ -140,7 +204,14 @@ one sheet in focus, a dried coffee ring stain on the paper, a glass of water at 
 ```
 A small golden dolphin scale model half sunk in dark peat water, mist over the surface,
 cold early morning, reeds barely visible in the haze. Still water, muted gold reflection.
-[+ базовый блок]
+
+Editorial photography, medium format look, 85mm, shallow depth of field.
+Muted desaturated palette: warm beige, cool grey-blue, soft cream light.
+Overcast morning after rain, thin haze, wet surfaces, no direct sun, no harsh shadows.
+Empty upper two thirds of the frame, single subject in the lower third, slightly right of centre.
+Calm, quiet, understated. Very few objects in frame.
+No people, no faces, no hands. No text, no letters, no numbers, no signage, no logos, no watermarks.
+Aspect ratio 4:5.
 ```
 
 ---
