@@ -24,17 +24,10 @@ const material = z.object({
     .optional(),
   cover: z.string().optional(),
   draft: z.boolean().default(false),
-  /** для type=tool: встраиваемый интерактив */
+  /** для type=tool: интерактив открывается отдельной страницей во весь экран */
   tool: z
     .object({
       src: z.string(),
-      /** фиксированная высота в px; оставлено для старых материалов */
-      height: z.number().optional(),
-      /** высота фрейма = calc(100vh - viewportOffset) — инструмент занимает экран */
-      viewportOffset: z.number().default(140),
-      minHeight: z.number().default(560),
-      /** широкий контейнер под инструмент (таблица УТП не влезает в 1200px) */
-      wide: z.boolean().default(true),
     })
     .optional(),
 });

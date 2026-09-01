@@ -36,11 +36,6 @@ const isTool = d.type === 'tool' && d.tool;
 const isStory = d.type === 'story' && !!d.story;
 const shareUrl = new URL(Astro.url.pathname, 'https://sistema.pragmatiq.online').href;
 const shareText = `${d.title} — ${SITE_NAME}`;
-const toolWide = isTool && d.tool.wide !== false;
-const frameStyle = isTool
-  ? `--tool-offset:${d.tool.viewportOffset}px; --tool-min:${d.tool.minHeight}px;` +
-    (d.tool.height ? ` --tool-max:${d.tool.height}px;` : '')
-  : '';
 ---
 
 <Base
@@ -51,7 +46,7 @@ const frameStyle = isTool
   updatedAt={d.updated?.toISOString()}
   ogImage={d.cover}
 >
-  <div class={isTool ? (toolWide ? 'content-tool' : 'content-wide') : 'content'}>
+  <div class="content">
     <article>
       <header style="margin-bottom:24px;">
         <div class="mat-card-meta" style="margin-bottom:12px;">
@@ -87,23 +82,15 @@ const frameStyle = isTool
       {
         isTool && (
           <>
-            <div class="tool-bar">
-              <span class="tool-hint">Инструмент работает прямо здесь — или на отдельной странице во весь экран</span>
+            <div class="tool-cta card">
+              <div class="card-title">Открыть конструктор</div>
+              <p style="margin-bottom:18px; color:var(--muted); font-size:14px;">
+                Инструмент открывается отдельной страницей во весь экран — периодической
+                таблице из 165 УТП нужна ширина. Бесплатно, без регистрации.
+              </p>
               <a class="btn btn-lime" href={d.tool.src} target="_blank" rel="noopener">
-                ↗ Открыть на весь экран
+                ↗ Открыть конструктор УТП
               </a>
-              <button class="btn btn-outline" id="tool-fs" type="button">⛶ Развернуть здесь</button>
-            </div>
-            <div class="tool-frame-wrap card" style="padding:0; margin-bottom:32px;">
-              <iframe
-                id="tool-frame"
-                class="tool-frame"
-                src={d.tool.src}
-                title={d.title}
-                style={frameStyle}
-                allowfullscreen
-                loading="lazy"
-              />
             </div>
             <div class="mobile-gate" style="margin-bottom:32px;">
               <div class="card-title">Инструмент доступен с компьютера</div>
@@ -173,10 +160,6 @@ const frameStyle = isTool
   </div>
 
   <script>
-    document.getElementById('tool-fs')?.addEventListener('click', () => {
-      document.getElementById('tool-frame')?.requestFullscreen?.();
-    });
-
     // Системное «Поделиться» (iOS, Android, macOS) — там оно открывает приложение Telegram
     const sys = document.querySelector('.share-sys') as HTMLButtonElement | null;
     if (sys && typeof navigator.share === 'function') {
