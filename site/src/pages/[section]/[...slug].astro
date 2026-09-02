@@ -193,12 +193,23 @@ const shareText = `${d.title} — ${SITE_NAME}`;
                 {next.data.story.teaser && <span class="nc-teaser">{next.data.story.teaser}</span>}
                 <span class="nc-go">Читать дальше ↳</span>
               </a>
+            ) : d.story.chapter >= STORY_SERIES.total ? (
+              <div class="next-chapter next-chapter--end">
+                <span class="nc-eyebrow">Конец</span>
+                <span class="nc-title">Двадцатая глава — последняя</span>
+                <span class="nc-teaser">
+                  «{STORY_SERIES.title}» — серия из двадцати рассказов о том, как
+                  нейробиология работает в продажах недвижимости, и о том, что она делает
+                  с тем, кто её применяет.
+                </span>
+                <a class="nc-go" href="/stories/">Все главы серии ↳</a>
+              </div>
             ) : (
               <div class="next-chapter next-chapter--last">
                 <span class="nc-eyebrow">Продолжение следует</span>
                 <span class="nc-title">Это последняя опубликованная глава</span>
                 <span class="nc-teaser">
-                  В сборнике двадцать глав, следующие выходят по мере готовности.
+                  Следующие главы выходят по мере готовности.
                 </span>
                 <a class="nc-go" href="/stories/">Все главы серии ↳</a>
               </div>

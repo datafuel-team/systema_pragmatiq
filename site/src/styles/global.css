@@ -994,3 +994,6 @@ a.next-chapter:hover { border-color: var(--text); border-left-color: var(--blue)
 .chip.on { background: var(--lime); border-color: var(--lime); color: var(--text); }
 .mat-cell { display: contents; }
 .mat-cell[hidden] { display: none; }
+
+.next-chapter--end { border-left-color: var(--blue); }
+.next-chapter--end .nc-eyebrow { color: var(--text); letter-spacing: 3px; }

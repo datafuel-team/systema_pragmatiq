@@ -1,6 +1,6 @@
 # Промты Higgsfield — обложки серии «Как нейробиолог квартиры продавал»
 
-Главы 2–11. Первая уже сделана: из девяти вариантов взят `01_v2` — там пустые две трети
+Главы 2–20. Для 1–11 кадры выбраны, для 12–20 — нужны. Первая сделана: из девяти вариантов взят `01_v2` — там пустые две трети
 кадра и всего три предмета. На этом и построены остальные промты.
 
 ## Как это работает
@@ -204,6 +204,150 @@ Aspect ratio 4:5.
 ```
 A small golden dolphin scale model half sunk in dark peat water, mist over the surface,
 cold early morning, reeds barely visible in the haze. Still water, muted gold reflection.
+
+Editorial photography, medium format look, 85mm, shallow depth of field.
+Muted desaturated palette: warm beige, cool grey-blue, soft cream light.
+Overcast morning after rain, thin haze, wet surfaces, no direct sun, no harsh shadows.
+Empty upper two thirds of the frame, single subject in the lower third, slightly right of centre.
+Calm, quiet, understated. Very few objects in frame.
+No people, no faces, no hands. No text, no letters, no numbers, no signage, no logos, no watermarks.
+Aspect ratio 4:5.
+```
+
+## Глава 12 — «Секта Свидетелей Бетона»
+
+Про сообщество, которое защищает застройщика само.
+
+```
+A ring of identical folding chairs in an empty concrete room, one chair turned outward from the circle, dust in the air.
+
+Editorial photography, medium format look, 85mm, shallow depth of field.
+Muted desaturated palette: warm beige, cool grey-blue, soft cream light.
+Overcast morning after rain, thin haze, wet surfaces, no direct sun, no harsh shadows.
+Empty upper two thirds of the frame, single subject in the lower third, slightly right of centre.
+Calm, quiet, understated. Very few objects in frame.
+No people, no faces, no hands. No text, no letters, no numbers, no signage, no logos, no watermarks.
+Aspect ratio 4:5.
+```
+
+## Глава 13 — «Защита от блокадного гена»
+
+Про кладовую и страх дефицита, доставшийся по наследству.
+
+```
+Deep pantry shelves with rows of old glass preserving jars in dim light, one shelf completely empty.
+
+Editorial photography, medium format look, 85mm, shallow depth of field.
+Muted desaturated palette: warm beige, cool grey-blue, soft cream light.
+Overcast morning after rain, thin haze, wet surfaces, no direct sun, no harsh shadows.
+Empty upper two thirds of the frame, single subject in the lower third, slightly right of centre.
+Calm, quiet, understated. Very few objects in frame.
+No people, no faces, no hands. No text, no letters, no numbers, no signage, no logos, no watermarks.
+Aspect ratio 4:5.
+```
+
+## Глава 14 — «Дельфины уходят на глубину»
+
+Про ошибку выжившего и тех, кого не считали.
+
+```
+A weathered life ring on a wooden post at the end of a foggy pier, still water below, far shore invisible.
+
+Editorial photography, medium format look, 85mm, shallow depth of field.
+Muted desaturated palette: warm beige, cool grey-blue, soft cream light.
+Overcast morning after rain, thin haze, wet surfaces, no direct sun, no harsh shadows.
+Empty upper two thirds of the frame, single subject in the lower third, slightly right of centre.
+Calm, quiet, understated. Very few objects in frame.
+No people, no faces, no hands. No text, no letters, no numbers, no signage, no logos, no watermarks.
+Aspect ratio 4:5.
+```
+
+## Глава 15 — «Чек для Джорджа Буша»
+
+Про обязательство перед самим собой.
+
+```
+A folded blank cheque pinned under a heavy glass paperweight on an otherwise bare wooden desk.
+
+Editorial photography, medium format look, 85mm, shallow depth of field.
+Muted desaturated palette: warm beige, cool grey-blue, soft cream light.
+Overcast morning after rain, thin haze, wet surfaces, no direct sun, no harsh shadows.
+Empty upper two thirds of the frame, single subject in the lower third, slightly right of centre.
+Calm, quiet, understated. Very few objects in frame.
+No people, no faces, no hands. No text, no letters, no numbers, no signage, no logos, no watermarks.
+Aspect ratio 4:5.
+```
+
+## Глава 16 — «Теорема Черчилля о сигарах»
+
+Про ртуть под детской площадкой и удобное объяснение.
+
+```
+A broken fluorescent tube half buried in wet dark soil, thin grass around it, cold overcast light.
+
+Editorial photography, medium format look, 85mm, shallow depth of field.
+Muted desaturated palette: warm beige, cool grey-blue, soft cream light.
+Overcast morning after rain, thin haze, wet surfaces, no direct sun, no harsh shadows.
+Empty upper two thirds of the frame, single subject in the lower third, slightly right of centre.
+Calm, quiet, understated. Very few objects in frame.
+No people, no faces, no hands. No text, no letters, no numbers, no signage, no logos, no watermarks.
+Aspect ratio 4:5.
+```
+
+## Глава 17 — «Очищение совести»
+
+Про первое утро после сделки.
+
+```
+An unopened champagne bottle and a handwritten envelope on a kitchen table at dawn, curtain light.
+
+Editorial photography, medium format look, 85mm, shallow depth of field.
+Muted desaturated palette: warm beige, cool grey-blue, soft cream light.
+Overcast morning after rain, thin haze, wet surfaces, no direct sun, no harsh shadows.
+Empty upper two thirds of the frame, single subject in the lower third, slightly right of centre.
+Calm, quiet, understated. Very few objects in frame.
+No people, no faces, no hands. No text, no letters, no numbers, no signage, no logos, no watermarks.
+Aspect ratio 4:5.
+```
+
+## Глава 18 — «Взгляд Тибетского Ламы»
+
+Про взгляд на себя со стороны.
+
+```
+Two empty chairs facing each other across a small table, a third chair standing apart by the wall.
+
+Editorial photography, medium format look, 85mm, shallow depth of field.
+Muted desaturated palette: warm beige, cool grey-blue, soft cream light.
+Overcast morning after rain, thin haze, wet surfaces, no direct sun, no harsh shadows.
+Empty upper two thirds of the frame, single subject in the lower third, slightly right of centre.
+Calm, quiet, understated. Very few objects in frame.
+No people, no faces, no hands. No text, no letters, no numbers, no signage, no logos, no watermarks.
+Aspect ratio 4:5.
+```
+
+## Глава 19 — «Таксоплазмоз продаж»
+
+Про границу допустимого.
+
+```
+A plain ventilation grille in a white wall, a few dried catnip leaves fallen on the floor beneath it.
+
+Editorial photography, medium format look, 85mm, shallow depth of field.
+Muted desaturated palette: warm beige, cool grey-blue, soft cream light.
+Overcast morning after rain, thin haze, wet surfaces, no direct sun, no harsh shadows.
+Empty upper two thirds of the frame, single subject in the lower third, slightly right of centre.
+Calm, quiet, understated. Very few objects in frame.
+No people, no faces, no hands. No text, no letters, no numbers, no signage, no logos, no watermarks.
+Aspect ratio 4:5.
+```
+
+## Глава 20 — «Иллюзия Аполлона»
+
+Финал: та же чашка, что в первой главе, шесть лет спустя.
+
+```
+A heavy white cup with a thick base on a wet stone parapet at dawn, city haze far below, nothing else.
 
 Editorial photography, medium format look, 85mm, shallow depth of field.
 Muted desaturated palette: warm beige, cool grey-blue, soft cream light.
