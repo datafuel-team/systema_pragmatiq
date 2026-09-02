@@ -582,6 +582,23 @@ tr:last-child td { border-bottom: none; }
   white-space: nowrap;
 }
 .pullstat .txt { font-size: 14px; color: var(--muted); max-width: 400px; }
+/* ---------- Картинка в материале ---------- */
+.fig {
+  margin: 28px 0;
+  background: var(--white);
+  border: 1px solid var(--border);
+  line-height: 0;
+}
+.fig img { width: 100%; height: auto; display: block; }
+.fig figcaption {
+  font-family: var(--mono);
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--muted);
+  padding: 10px 14px;
+  border-top: 1px solid var(--border);
+}
+
 .table-scroll { overflow-x: auto; margin: 0 0 20px; background: var(--white); border: 1px solid var(--border); }
 .table-scroll table { min-width: 680px; }
 @media (max-width: 900px) {
