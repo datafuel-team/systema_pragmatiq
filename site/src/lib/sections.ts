@@ -94,3 +94,6 @@ export const CONTACTS = {
   site: 'https://pragmatiq.ru',
   siteLabel: 'pragmatiq.ru',
 };
+
+/** Яндекс.Метрика: номер счётчика sistema.pragmatiq.online (не секрет — попадает в HTML) */
+export const METRIKA_ID = '103432924';

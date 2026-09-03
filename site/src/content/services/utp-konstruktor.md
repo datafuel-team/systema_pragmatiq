@@ -12,7 +12,7 @@ meta:
   - { label: "Классы жилья", value: "5 классов по методике РГР" }
   - { label: "Доступ", value: "бесплатно, без регистрации" }
 tool:
-  src: /tools/utp/index.html?v=2026-09-01
+  src: /tools/utp/index.html?v=2026-09-03
 ---
 
 ## Что это

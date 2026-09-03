@@ -1,5 +1,5 @@
 ---
-import { SITE_NAME, SITE_URL } from '../lib/sections';
+import { METRIKA_ID, SITE_NAME, SITE_URL } from '../lib/sections';
 
 interface Props {
   title: string;
@@ -20,7 +20,6 @@ const fullTitle = rawTitle ? title : `${title} — ${SITE_NAME}`;
 const canonical = new URL(Astro.url.pathname, SITE_URL).href;
 const ogImageUrl = ogImage ? new URL(ogImage, SITE_URL).href : `${SITE_URL}/og-default.png`;
 
-const metrikaId = import.meta.env.PUBLIC_METRIKA_ID || '';
 const gscCode = import.meta.env.PUBLIC_GSC_VERIFICATION || '';
 const yandexCode = import.meta.env.PUBLIC_YANDEX_VERIFICATION || '';
 
@@ -71,30 +70,30 @@ const articleSchema = publishedAt
 <script type="application/ld+json" set:html={JSON.stringify(orgSchema)} />
 {articleSchema && <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />}
 
-{
-  metrikaId && !noindex && (
-    <script
-      is:inline
-      define:vars={{ metrikaId }}
-    >
-      /* Метрика получает URL без токенов magic-link */
-      (function (m, e, t, r, i, k, a) {
-        m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments); };
-        m[i].l = 1 * new Date();
-        (k = e.createElement(t)), (a = e.getElementsByTagName(t)[0]);
-        k.async = 1; k.src = r; a.parentNode.insertBefore(k, a);
-      })(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js', 'ym');
-      var cleanUrl = new URL(location.href);
-      ['token', 'auth_token', 'code', 'hash', 'tg_id'].forEach(function (p) {
-        if (cleanUrl.searchParams.has(p)) cleanUrl.searchParams.set(p, '__redacted__');
-      });
-      ym(Number(metrikaId), 'init', {
-        clickmap: true,
-        trackLinks: true,
-        accurateTrackBounce: true,
-        params: {},
-        url: cleanUrl.toString(),
-      });
-    </script>
-  )
-}
+<!-- Yandex.Metrika counter -->
+<script is:inline define:vars={{ metrikaId: METRIKA_ID }}>
+  (function (m, e, t, r, i, k, a) {
+    m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments); };
+    m[i].l = 1 * new Date();
+    for (var j = 0; j < document.scripts.length; j++) { if (document.scripts[j].src === r) { return; } }
+    k = e.createElement(t); a = e.getElementsByTagName(t)[0]; k.async = 1; k.src = r; a.parentNode.insertBefore(k, a);
+  })(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js?id=' + metrikaId, 'ym');
+
+  /* Метрика получает URL без токенов magic-link закрытой части */
+  var cleanUrl = new URL(location.href);
+  ['token', 'auth_token', 'code', 'hash', 'tg_id'].forEach(function (p) {
+    if (cleanUrl.searchParams.has(p)) cleanUrl.searchParams.set(p, '__redacted__');
+  });
+
+  ym(Number(metrikaId), 'init', {
+    ssr: true,
+    webvisor: true,
+    clickmap: true,
+    ecommerce: 'dataLayer',
+    referrer: document.referrer,
+    url: cleanUrl.toString(),
+    accurateTrackBounce: true,
+    trackLinks: true,
+  });
+</script>
+<!-- /Yandex.Metrika counter -->

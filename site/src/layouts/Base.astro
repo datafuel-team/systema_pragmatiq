@@ -1,7 +1,7 @@
 ---
 import Seo from '../components/Seo.astro';
 import Sidebar from '../components/Sidebar.astro';
-import { CONTACTS, SITE_NAME } from '../lib/sections';
+import { CONTACTS, METRIKA_ID, SITE_NAME } from '../lib/sections';
 import '../styles/global.css';
 
 interface Props {
@@ -65,6 +65,7 @@ const breadcrumbSchema =
     </script>
   </head>
   <body>
+    <noscript><div><img src={`https://mc.yandex.ru/watch/${METRIKA_ID}`} style="position:absolute; left:-9999px;" alt="" /></div></noscript>
     <header class="topbar">
       <button class="nav-expand" id="nav-expand" aria-label="Открыть меню" title="Открыть меню">›</button>
       {
