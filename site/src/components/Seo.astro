@@ -11,10 +11,13 @@ interface Props {
   /** ISO-дата публикации — включает schema.org Article */
   publishedAt?: string;
   updatedAt?: string;
+  tags?: string[];
+  sectionTitle?: string;
 }
 
-const { title, description, rawTitle = false, noindex = false, ogImage, publishedAt, updatedAt } =
-  Astro.props;
+const {
+  title, description, rawTitle = false, noindex = false, ogImage, publishedAt, updatedAt, tags = [], sectionTitle,
+} = Astro.props;
 
 const fullTitle = rawTitle ? title : `${title} — ${SITE_NAME}`;
 const canonical = new URL(Astro.url.pathname, SITE_URL).href;
@@ -31,17 +34,26 @@ const orgSchema = {
   sameAs: ['https://t.me/pragmatik_agency', SITE_URL],
 };
 
+// Article: для поисковиков и для контентной аналитики Метрики (тип разметки — Schema.org, JSON-LD).
+// Метрике обязательны @id, headline и текст; текст она берёт из элемента, на который указывает
+// якорь в @id (#material — блок с текстом материала), поэтому дублировать его в JSON не нужно.
 const articleSchema = publishedAt
   ? {
       '@context': 'https://schema.org',
       '@type': 'Article',
+      '@id': `${canonical}#material`,
+      url: canonical,
+      mainEntityOfPage: canonical,
       headline: title,
       description,
+      image: ogImageUrl,
       datePublished: publishedAt,
-      ...(updatedAt ? { dateModified: updatedAt } : {}),
-      author: { '@type': 'Organization', name: 'Прагматик', url: 'https://pragmatiq.ru' },
-      publisher: { '@type': 'Organization', name: 'Прагматик' },
-      mainEntityOfPage: canonical,
+      dateModified: updatedAt ?? publishedAt,
+      author: [{ '@type': 'Organization', name: 'Прагматик', url: 'https://pragmatiq.ru' }],
+      publisher: { '@type': 'Organization', name: 'Прагматик', url: 'https://pragmatiq.ru' },
+      ...(sectionTitle ? { articleSection: sectionTitle } : {}),
+      ...(tags.length ? { keywords: tags.join(', '), about: tags.map((t) => ({ '@type': 'Thing', name: t })) } : {}),
+      inLanguage: 'ru',
     }
   : null;
 ---

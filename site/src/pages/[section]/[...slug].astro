@@ -38,6 +38,19 @@ const isStory = d.type === 'story' && !!d.story;
 const toc = !isStory && !isTool ? headings.filter((h) => h.depth === 2) : [];
 const showToc = toc.length >= 5;
 const shareUrl = new URL(Astro.url.pathname, 'https://sistema.pragmatiq.online').href;
+// Рубрика для контентной аналитики Метрики: она ищет BreadcrumbList внутри элемента материала
+// (#material) и берёт name с наибольшей position — поэтому здесь только раздел, без заголовка.
+const rubricSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      item: { '@id': `https://sistema.pragmatiq.online/${section.id}/`, name: section.title },
+    },
+  ],
+};
 const shareText = `${d.title} — ${SITE_NAME}`;
 ---
 
@@ -48,6 +61,8 @@ const shareText = `${d.title} — ${SITE_NAME}`;
   publishedAt={d.date.toISOString()}
   updatedAt={d.updated?.toISOString()}
   ogImage={d.cover}
+  tags={d.tags}
+  sectionTitle={section.title}
 >
   <div class="content">
     <article>
@@ -159,7 +174,8 @@ const shareText = `${d.title} — ${SITE_NAME}`;
         )
       }
 
-      <div class:list={['prose', { 'prose-story': isStory }]}>
+      <div id="material" class:list={['prose', { 'prose-story': isStory }]}>
+        <script type="application/ld+json" set:html={JSON.stringify(rubricSchema)} />
         <Content />
       </div>
 
