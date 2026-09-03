@@ -1,5 +1,7 @@
 # OG-заставка сайта
 
+Здесь — только заставка главной (`og-default.png`). Картинки остальных страниц генерируются на сборке: `src/pages/og/[...path].png.ts` (satori + resvg, шрифты в `src/og/fonts/`), тот же стиль; править макет — там.
+
 `og-default.html` — исходник карточки 1200×630 в стиле Pragmatiq Light (Onest + JetBrains Mono, логотип `public/img/logo-pragmatiq.svg`).
 Пересобрать PNG (нужен установленный Chrome, шрифты грузятся с Google Fonts):
 
