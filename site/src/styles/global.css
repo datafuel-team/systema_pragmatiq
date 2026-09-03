@@ -32,8 +32,7 @@ img { max-width: 100%; height: auto; }
 
 /* ---------- Топбар (светлый) ---------- */
 .topbar {
-  background: rgba(244, 243, 241, 0.94);
-  backdrop-filter: blur(4px);
+  background: var(--bg);
   color: var(--text);
   position: fixed;
   top: 0; left: 0; right: 0;
@@ -52,6 +51,7 @@ img { max-width: 100%; height: auto; }
   font-family: var(--mono);
   font-size: 14px;
   width: 30px; height: 30px;
+  flex: 0 0 auto;
   cursor: pointer;
   display: none;
   align-items: center;
@@ -494,7 +494,16 @@ tr:last-child td { border-bottom: none; }
 .mobile-gate { display: none; }
 
 @media (max-width: 900px) {
-  .nav-expand { display: flex; }
+  .nav-expand {
+    display: flex;
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+  }
+  /* на телефоне меню открывают и закрывают одной кнопкой в шапке */
+  .nav-collapse { display: none; }
+  /* крошкам не остаётся ширины рядом с кнопкой и CTA; путь виден по ссылке «назад» */
+  .topbar-crumbs { display: none; }
   .layout { padding-left: 0; }
   .sidebar { transform: translateX(-100%); }
   body.nav-open .sidebar { transform: translateX(0); box-shadow: 4px 0 24px rgba(0,0,0,0.12); }
