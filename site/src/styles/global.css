@@ -16,7 +16,7 @@
   --topbar-h: 52px;
 }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; scroll-padding-top: calc(var(--topbar-h) + 12px); }
 
 body {
   font-family: var(--font);
@@ -32,10 +32,14 @@ img { max-width: 100%; height: auto; }
 
 /* ---------- Топбар (светлый) ---------- */
 .topbar {
-  background: var(--bg);
+  background: rgba(244, 243, 241, 0.94);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
   color: var(--text);
-  position: fixed;
-  top: 0; left: 0; right: 0;
+  /* sticky, а не fixed: во встроенном браузере Telegram у fixed-шапки
+     при прокрутке со шторкой над ней проступает текст страницы */
+  position: sticky;
+  top: 0;
   height: var(--topbar-h);
   z-index: 200;
   display: flex;
@@ -269,9 +273,10 @@ body.nav-collapsed .nav-expand { display: flex; }
 
 /* ---------- Раскладка ---------- */
 .layout {
-  padding-top: var(--topbar-h);
   padding-left: var(--sidebar-w);
-  min-height: 100vh;
+  /* шапка теперь в потоке, поэтому вычитаем её высоту — иначе короткая
+     страница получает лишние 52px прокрутки */
+  min-height: calc(100vh - var(--topbar-h));
   display: flex;
   flex-direction: column;
   transition: padding-left 0.2s ease;
