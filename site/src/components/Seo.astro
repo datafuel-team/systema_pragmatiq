@@ -19,7 +19,8 @@ const {
   title, description, rawTitle = false, noindex = false, ogImage, publishedAt, updatedAt, tags = [], sectionTitle,
 } = Astro.props;
 
-const fullTitle = rawTitle ? title : `${title} — ${SITE_NAME}`;
+// у материалов длинные заголовки — суффикс короткий, чтобы title не резался в выдаче
+const fullTitle = rawTitle ? title : publishedAt ? `${title} — Прагматик` : `${title} — ${SITE_NAME}`;
 const canonical = new URL(Astro.url.pathname, SITE_URL).href;
 const ogImageUrl = ogImage ? new URL(ogImage, SITE_URL).href : `${SITE_URL}/og-default.png`;
 
@@ -72,14 +73,16 @@ const articleSchema = publishedAt
 <meta property="og:title" content={fullTitle} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={ogImageUrl} />
-{!ogImage && <meta property="og:image:width" content="2400" />}
-{!ogImage && <meta property="og:image:height" content="1260" />}
+<meta property="og:image:width" content="2400" />
+<meta property="og:image:height" content="1260" />
 <meta name="twitter:image" content={ogImageUrl} />
 <meta property="og:locale" content="ru_RU" />
 <meta property="og:site_name" content={SITE_NAME} />
 <meta name="twitter:card" content="summary_large_image" />
 
 <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
 
 <script type="application/ld+json" set:html={JSON.stringify(orgSchema)} />

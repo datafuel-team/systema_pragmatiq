@@ -4,7 +4,21 @@
     {
       "name": "systema-site",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev", "--prefix", "site"],
+      "runtimeArgs": [
+        "run",
+        "dev",
+        "--prefix",
+        "site"
+      ],
+      "port": 4321
+    },
+    {
+      "name": "sistema-preview",
+      "runtimeExecutable": "bash",
+      "runtimeArgs": [
+        "-lc",
+        "export NVM_DIR=\"$HOME/.nvm\"; . \"$NVM_DIR/nvm.sh\"; nvm use 22 >/dev/null; cd site && npx astro preview --host 127.0.0.1 --port 4321"
+      ],
       "port": 4321
     }
   ]

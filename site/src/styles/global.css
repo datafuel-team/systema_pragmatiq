@@ -112,18 +112,13 @@ body.nav-collapsed .nav-expand { display: flex; }
 }
 .side-logo {
   display: flex;
-  align-items: center;
-  gap: 10px;
+  flex-direction: column;
+  gap: 7px;
   min-width: 0;
+  text-decoration: none;
+  color: var(--text);
 }
-.side-logo .spark { color: var(--blue); font-size: 18px; }
-.side-logo b {
-  display: block;
-  font-size: 14px;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-  line-height: 1.1;
-}
+.side-logo img { display: block; width: 204px; height: auto; }
 .side-logo small {
   display: block;
   font-family: var(--mono);
@@ -131,7 +126,6 @@ body.nav-collapsed .nav-expand { display: flex; }
   letter-spacing: 1px;
   text-transform: uppercase;
   color: var(--muted);
-  margin-top: 2px;
 }
 .nav-collapse {
   position: absolute;

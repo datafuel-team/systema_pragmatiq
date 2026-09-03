@@ -60,7 +60,7 @@ const shareText = `${d.title} — ${SITE_NAME}`;
   crumbs={[{ label: section.title, href: `/${section.id}/` }, { label: d.title }]}
   publishedAt={d.date.toISOString()}
   updatedAt={d.updated?.toISOString()}
-  ogImage={d.cover}
+  ogImage={`/og/${section.id}/${entry.id}.png`}
   tags={d.tags}
   sectionTitle={section.title}
 >
