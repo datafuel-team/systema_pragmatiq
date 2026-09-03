@@ -2,11 +2,14 @@
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import MaterialCard from '../components/MaterialCard.astro';
-import { SECTIONS, SITE_NAME } from '../lib/sections';
+import { SITE_NAME } from '../lib/sections';
+import { visibleSections } from '../lib/nav';
+
+const sections = await visibleSections();
 
 type Entry = { sectionId: string; id: string; data: any };
 const all: Entry[] = [];
-for (const s of SECTIONS) {
+for (const s of sections) {
   const items = await getCollection(s.id, ({ data }) => !data.draft);
   let entries = items.map((item) => ({ sectionId: s.id, id: item.id, data: item.data }));
   // серия целиком затопила бы ленту: показываем одну карточку — вход в свежую серию
@@ -63,7 +66,7 @@ const latest = all.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
       <div class="section-title">02 &nbsp; Разделы</div>
       <div class="mat-grid">
         {
-          SECTIONS.map((s) => (
+          sections.map((s) => (
             <a class="mat-card" href={`/${s.id}/`}>
               <div class="mat-card-title">{s.title}</div>
               <div class="mat-card-desc">{s.description}</div>

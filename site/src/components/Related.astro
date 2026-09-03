@@ -1,6 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
-import { SECTIONS } from '../lib/sections';
+import { visibleSections } from '../lib/nav';
 import MaterialCard from './MaterialCard.astro';
 
 interface Props {
@@ -16,7 +16,7 @@ const { related, tags = [], selfId = '' } = Astro.props;
 
 type Entry = { sectionId: string; id: string; data: any };
 const all: Entry[] = [];
-for (const s of SECTIONS) {
+for (const s of await visibleSections()) {
   const items = await getCollection(s.id, ({ data }) => !data.draft);
   for (const item of items) all.push({ sectionId: s.id, id: item.id, data: item.data });
 }
@@ -40,7 +40,19 @@ const byTags =
         .slice(0, 4 - explicit.length)
     : [];
 
-const items = [...explicit, ...byTags];
+let items = [...explicit, ...byTags];
+
+// В нерассказных разделах в рекомендациях всегда ровно одна глава серии
+// «Как нейробиолог квартиры продавал» — вход в серию с любого материала.
+if (!selfId.startsWith('stories/')) {
+  const chapters = all
+    .filter((e) => e.sectionId === 'stories')
+    .sort((a, b) => (a.data.story?.chapter ?? 0) - (b.data.story?.chapter ?? 0));
+  const story = items.find((e) => e.sectionId === 'stories') ?? chapters[0];
+  items = items.filter((e) => e.sectionId !== 'stories').slice(0, 3);
+  if (story) items.push(story);
+}
+items = items.slice(0, 4);
 ---
 
 {

@@ -1,11 +1,14 @@
 ---
 import { getCollection } from 'astro:content';
-import { SECTIONS, CONTACTS } from '../lib/sections';
+import { CONTACTS } from '../lib/sections';
+import { visibleSections } from '../lib/nav';
 
 const current = Astro.url.pathname;
 
+const sections = await visibleSections();
+
 const sectionsWithItems = await Promise.all(
-  SECTIONS.map(async (s) => {
+  sections.map(async (s) => {
     const items = (await getCollection(s.id, ({ data }) => !data.draft))
       .sort((a, b) =>
         s.id === 'stories'
@@ -41,7 +44,7 @@ const sectionOpen = (id: string) => current.startsWith(`/${id}`);
         <div class:list={['side-group', { open: sectionOpen(s.id) }]} data-group={s.id}>
           <button class="side-group-head" type="button" aria-expanded={sectionOpen(s.id)}>
             <span class="glyph">✦</span>
-            {s.title}
+            {s.navTitle ?? s.title}
             <span class="chev">▸</span>
           </button>
           <div class="side-group-items">

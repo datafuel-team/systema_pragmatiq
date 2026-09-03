@@ -11,6 +11,7 @@ story:
 cover: /stories/09.jpg
 tags: [проза, нейромаркетинг, невозвратные затраты, клиентский путь, застройщик]
 related: [stories/mindalina-na-strazhe-ipoteki]
+draft: true
 ---
 
 Славу Куна нанимали не для Германа.

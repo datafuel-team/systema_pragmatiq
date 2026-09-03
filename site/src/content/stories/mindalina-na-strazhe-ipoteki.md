@@ -11,6 +11,7 @@ story:
 cover: /stories/08.jpg
 tags: [проза, нейромаркетинг, миндалина, дефицит, ипотека]
 related: [stories/effekt-svyashchennoj-kruzhki]
+draft: true
 ---
 
 К третьему году в компании была вежливая проблема, которую все обходили: люди перестали торопиться.

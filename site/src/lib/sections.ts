@@ -11,6 +11,8 @@ export type SectionId =
 export interface SectionDef {
   id: SectionId;
   title: string;
+  /** имя пункта в боковом меню, если оно отличается от title */
+  navTitle?: string;
   /** короткая подпись для hub-страницы и meta description */
   description: string;
   order: number;
@@ -67,6 +69,7 @@ export const SECTIONS: SectionDef[] = [
   {
     id: 'stories',
     title: 'Рассказы',
+    navTitle: 'Как нейробиолог квартиры продавал',
     description:
       'Серия «Как нейробиолог квартиры продавал»: сатирическая проза о том, как Герман применяет нейробиологию к продажам квартир, и разбор механизма в конце каждой главы.',
     order: 8,

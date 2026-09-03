@@ -11,6 +11,7 @@ story:
 cover: /stories/10.jpg
 tags: [проза, нейромаркетинг, система 1 и 2, рационализация, застройщик]
 related: [stories/lovushka-nevozvratnyh-investicij]
+draft: true
 ---
 
 Марина Кожевникова влюбилась в квартиру за девять секунд.

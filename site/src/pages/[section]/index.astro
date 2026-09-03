@@ -2,10 +2,11 @@
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import MaterialCard from '../../components/MaterialCard.astro';
-import { SECTIONS } from '../../lib/sections';
+import { visibleSections } from '../../lib/nav';
 
 export async function getStaticPaths() {
-  return SECTIONS.map((s) => ({ params: { section: s.id }, props: { section: s } }));
+  const sections = await visibleSections();
+  return sections.map((s) => ({ params: { section: s.id }, props: { section: s } }));
 }
 
 const { section } = Astro.props;

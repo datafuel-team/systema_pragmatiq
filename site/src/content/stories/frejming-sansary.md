@@ -11,6 +11,7 @@ story:
 cover: /stories/05.jpg
 tags: [проза, нейромаркетинг, фрейминг, когнитивная переоценка, застройщик]
 related: [stories/privychka-pit-pustotu]
+draft: true
 ---
 
 Девяносто шесть квартир висели с самого старта.
