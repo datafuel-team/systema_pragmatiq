@@ -160,42 +160,32 @@ const breadcrumbSchema =
         if (/^https?:\/\/(www\.)?pragmatiq\.ru/.test(href)) return goal('site_pragmatiq');
       });
 
-      // Чтение материала: половина текста и дочитывание (конец текста + не меньше 30 с на странице)
+      // Чтение материала: половина текста и дочитывание (конец текста виден + не меньше 30 с на странице).
+      // Геометрия проверяется по скроллу и раз в секунду — без rAF/IntersectionObserver, которые
+      // молчат в фоновых вкладках.
       const prose = document.querySelector('.prose');
       if (prose) {
         const started = Date.now();
         let half = false;
-        const checkHalf = () => {
-          if (half) return;
+        let full = false;
+        const check = () => {
           const r = prose.getBoundingClientRect();
-          if (window.innerHeight >= r.top + r.height / 2) {
+          if (!half && window.innerHeight >= r.top + r.height / 2) {
             half = true;
             goal('read_half');
-            window.removeEventListener('scroll', onScroll);
+          }
+          if (!full && r.bottom <= window.innerHeight && Date.now() - started >= 30000) {
+            full = true;
+            goal('read_full');
+          }
+          if (half && full) {
+            clearInterval(timer);
+            window.removeEventListener('scroll', check);
           }
         };
-        let ticking = false;
-        const onScroll = () => {
-          if (ticking) return;
-          ticking = true;
-          requestAnimationFrame(() => { ticking = false; checkHalf(); });
-        };
-        window.addEventListener('scroll', onScroll, { passive: true });
-        checkHalf();
-
-        const end = document.createElement('div');
-        end.setAttribute('aria-hidden', 'true');
-        end.style.height = '1px';
-        prose.appendChild(end);
-        let full = false;
-        const fire = () => { if (!full) { full = true; goal('read_full'); } };
-        const io = new IntersectionObserver((entries) => {
-          if (!entries.some((x) => x.isIntersecting)) return;
-          io.disconnect();
-          const left = 30000 - (Date.now() - started);
-          left <= 0 ? fire() : setTimeout(fire, left);
-        });
-        io.observe(end);
+        const timer = setInterval(check, 1000);
+        window.addEventListener('scroll', check, { passive: true });
+        check();
       }
     </script>
   </body>
