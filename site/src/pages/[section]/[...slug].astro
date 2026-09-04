@@ -28,6 +28,13 @@ export async function getStaticPaths() {
 const { entry, section, next } = Astro.props;
 const { Content, headings } = await render(entry);
 const d = entry.data;
+// A/B-тест длины текста: если для материала есть src/ab/<slug>.md, страница несёт обе версии,
+// а показывает одну — вариант закрепляется за браузером в localStorage (см. inline-скрипт ниже).
+// Полная версия стоит в HTML первой и видима по умолчанию: её индексируют поисковики.
+const abMods = import.meta.glob('../../ab/*.md', { eager: true }) as Record<string, any>;
+const abMod = abMods[`../../ab/${entry.id}.md`];
+const ShortContent = abMod?.Content;
+const abTest = abMod ? `len_${entry.id}` : null;
 const dateStr = d.date.toLocaleDateString('ru-RU', {
   day: 'numeric',
   month: 'long',
@@ -174,9 +181,39 @@ const shareText = `${d.title} — ${SITE_NAME}`;
         )
       }
 
-      <div id="material" class:list={['prose', { 'prose-story': isStory }]}>
+      <div id="material" class:list={['prose', { 'prose-story': isStory }]} data-ab={abTest}>
         <script type="application/ld+json" set:html={JSON.stringify(rubricSchema)} />
-        <Content />
+        {
+          ShortContent ? (
+            <>
+              <div class="ab-variant" data-variant="long">
+                <Content />
+              </div>
+              <div class="ab-variant" data-variant="short" hidden>
+                <ShortContent />
+              </div>
+              <script is:inline>
+                // Выбор варианта до отрисовки текста: 50/50, закрепляется за браузером.
+                (function () {
+                  var m = document.getElementById('material');
+                  var test = m.getAttribute('data-ab');
+                  var key = 'ab_' + test;
+                  var v = null;
+                  try { v = localStorage.getItem(key); } catch (e) {}
+                  if (v !== 'short' && v !== 'long') {
+                    v = Math.random() < 0.5 ? 'short' : 'long';
+                    try { localStorage.setItem(key, v); } catch (e) {}
+                  }
+                  var vs = m.querySelectorAll('.ab-variant');
+                  for (var i = 0; i < vs.length; i++) vs[i].hidden = vs[i].getAttribute('data-variant') !== v;
+                  window.__ab = { test: test, variant: v };
+                })();
+              </script>
+            </>
+          ) : (
+            <Content />
+          )
+        }
       </div>
 
       {

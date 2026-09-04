@@ -163,20 +163,38 @@ const breadcrumbSchema =
       // Чтение материала: половина текста и дочитывание (конец текста виден + не меньше 30 с на странице).
       // Геометрия проверяется по скроллу и раз в секунду — без rAF/IntersectionObserver, которые
       // молчат в фоновых вкладках.
+      // A/B-тест длины текста (см. [...slug].astro): вариант уходит параметром визита и в цели чтения,
+      // глубина прокрутки по тексту — целью scroll_depth с шагом 25%.
+      const ab = (window as any).__ab as { test: string; variant: string } | undefined;
+      const abParams = ab ? { ab: `${ab.test}:${ab.variant}` } : undefined;
+      if (ab && counter && typeof (window as any).ym === 'function') {
+        (window as any).ym(counter, 'params', { ab_test: ab.test, ab_variant: ab.variant });
+      }
+
       const prose = document.querySelector('.prose');
       if (prose) {
         const started = Date.now();
         let half = false;
         let full = false;
+        const depthSent = new Set<number>();
         const check = () => {
           const r = prose.getBoundingClientRect();
+          if (ab) {
+            const seen = Math.max(0, Math.min(1, (window.innerHeight - r.top) / r.height));
+            for (const pct of [25, 50, 75, 100]) {
+              if (!depthSent.has(pct) && seen * 100 >= pct) {
+                depthSent.add(pct);
+                goal('scroll_depth', { ...abParams, pct: String(pct) });
+              }
+            }
+          }
           if (!half && window.innerHeight >= r.top + r.height / 2) {
             half = true;
-            goal('read_half');
+            goal('read_half', abParams);
           }
           if (!full && r.bottom <= window.innerHeight && Date.now() - started >= 30000) {
             full = true;
-            goal('read_full');
+            goal('read_full', abParams);
           }
           if (half && full) {
             clearInterval(timer);
