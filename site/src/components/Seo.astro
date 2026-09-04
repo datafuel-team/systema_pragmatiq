@@ -25,7 +25,7 @@ const canonical = new URL(Astro.url.pathname, SITE_URL).href;
 const ogImageUrl = ogImage ? new URL(ogImage, SITE_URL).href : `${SITE_URL}/og-default.png`;
 
 const gscCode = import.meta.env.PUBLIC_GSC_VERIFICATION || '';
-const yandexCode = import.meta.env.PUBLIC_YANDEX_VERIFICATION || '';
+const yandexCode = import.meta.env.PUBLIC_YANDEX_VERIFICATION || '354d288e089046e1';
 
 const orgSchema = {
   '@context': 'https://schema.org',
