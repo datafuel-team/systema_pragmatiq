@@ -643,7 +643,8 @@ tr:last-child td { border-bottom: none; }
   font-size: 13px;
   letter-spacing: 8px;
 }
-.prose-story > p:first-of-type::first-letter {
+.prose-story > p:first-of-type::first-letter,
+.prose-story .ab-variant > p:first-of-type::first-letter {
   float: left;
   font-size: 52px;
   font-weight: 700;
@@ -689,7 +690,8 @@ tr:last-child td { border-bottom: none; }
 }
 @media (max-width: 900px) {
   .prose-story { font-size: 16px; }
-  .prose-story > p:first-of-type::first-letter { font-size: 44px; }
+  .prose-story > p:first-of-type::first-letter,
+.prose-story .ab-variant > p:first-of-type::first-letter { font-size: 44px; }
 }
 
 /* ---------- Врезка «Механизм»: сухой разбор в конце рассказа ---------- */
